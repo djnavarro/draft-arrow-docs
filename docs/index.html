@@ -59,7 +59,7 @@
     
     <a class="navbar-brand me-2" href="index.html">Arrow R Package</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">9.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">10.0.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,8 +82,8 @@
     <a class="dropdown-item" href="articles/data_wrangling.html">Data analysis with dplyr syntax</a>
     <a class="dropdown-item" href="articles/dataset.html">Working with multi-file data sets</a>
     <a class="dropdown-item" href="articles/python.html">Integrating Arrow, Python, and R</a>
-    <a class="dropdown-item" href="articles/cloud_storage.html">Using cloud storage (S3, GCS)</a>
-    <a class="dropdown-item" href="articles/flight.html">Connecting to a flight server</a>
+    <a class="dropdown-item" href="articles/fs.html">Using cloud storage (S3, GCS)</a>
+    <a class="dropdown-item" href="articles/flight.html">Connecting to a Flight server</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Arrow concepts</h6>
     <a class="dropdown-item" href="articles/data_objects.html">Data objects</a>
@@ -92,7 +92,7 @@
     <a class="dropdown-item" href="articles/package_conventions.html">Package conventions</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Installation</h6>
-    <a class="dropdown-item" href="articles/install_linux.html">Installing on Linux</a>
+    <a class="dropdown-item" href="articles/install.html">Installing on Linux</a>
     <a class="dropdown-item" href="articles/install_nightly.html">Installing development versions</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="articles/index.html">More articles...</a>
@@ -114,10 +114,8 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header">
-<img src="logo.png" class="logo" alt=""><h1 id="arrow-">arrow <a class="anchor" aria-label="anchor" href="#arrow-"></a>
-</h1>
-</div>
+<div class="page-header"><h1 id="arrow-">arrow <img src="https://arrow.apache.org/img/arrow-logo_hex_black-txt_white-bg.png" align="right" alt="" width="120"><a class="anchor" aria-label="anchor" href="#arrow-"></a>
+</h1></div>
 
 <p><a href="https://arrow.apache.org/" class="external-link">Apache Arrow</a> is a cross-language development platform for in-memory data. It specifies a standardized language-independent columnar memory format for flat and hierarchical data, organized for efficient analytic operations on modern hardware. It also provides computational libraries and zero-copy streaming messaging and interprocess communication.</p>
 <p>The <code>arrow</code> R package exposes an interface to the Arrow C++ library, enabling access to many of its features in R. It provides low-level access to the Arrow C++ library API and higher-level access through a <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> backend and familiar R functions.</p>
@@ -162,9 +160,9 @@
 <p>In most cases installing the latest release should “just work” without requiring any additional system dependencies, especially if you are using Window or a Mac. For those users, CRAN hosts binary packages that contain the Arrow C++ library upon which the <code>arrow</code> package relies, and no additional steps should be required.</p>
 <p>There are some special cases to note:</p>
 <ul>
-<li><p>On Linux the installation process can sometimes be more involved because CRAN does not host binaries for Linux. For more information please see <code><a href="articles/install_linux.html">vignette("install_linux", package = "arrow")</a></code>.</p></li>
-<li><p>If you are compiling <code>arrow</code> from source, please note that as of version 10.0.0, <code>arrow</code> requires C++17 to build. This has implications on Windows and CentOS 7. For Windows users it means you need to be running an R version of 4.0 or later. On CentOS 7, it means you need to install a newer compiler than the default system compiler gcc 4.8. See <code><a href="articles/install_details.html">vignette("install_details", package = "arrow")</a></code> for guidance. Not that this does not affect users who are installing a binary version of the package.</p></li>
-<li><p>Development versions of <code>arrow</code> are released nightly. Most users will not need to install nightly builds, but if you do please see <code><a href="articles/install_nightly.html">vignette("install_nightly", package = "arrow")</a></code> for more information.</p></li>
+<li><p>On Linux the installation process can sometimes be more involved because CRAN does not host binaries for Linux. For more information please see the <a href="https://arrow.apache.org/docs/r/articles/install.html">installation guide</a>.</p></li>
+<li><p>If you are compiling <code>arrow</code> from source, please note that as of version 10.0.0, <code>arrow</code> requires C++17 to build. This has implications on Windows and CentOS 7. For Windows users it means you need to be running an R version of 4.0 or later. On CentOS 7, it means you need to install a newer compiler than the default system compiler gcc 4.8. See the <a href="https://arrow.apache.org/docs/r/articles/developers/install_details.html">installation details article</a> for guidance. Not that this does not affect users who are installing a binary version of the package.</p></li>
+<li><p>Development versions of <code>arrow</code> are released nightly. Most users will not need to install nightly builds, but if you do please see the article on [installing nightly builds](<a href="https://arrow.apache.org/docs/r/articles/install_nightly.html">installation guide</a> for more information.</p></li>
 </ul>
 </div>
 <div class="section level2">

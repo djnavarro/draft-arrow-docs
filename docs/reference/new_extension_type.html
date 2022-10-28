@@ -36,7 +36,7 @@ vctrs extension type is probably sufficient."><meta property="og:image" content=
     
     <a class="navbar-brand me-2" href="../index.html">Arrow R Package</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">9.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">10.0.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,8 +58,8 @@ vctrs extension type is probably sufficient."><meta property="og:image" content=
     <a class="dropdown-item" href="../articles/data_wrangling.html">Data analysis with dplyr syntax</a>
     <a class="dropdown-item" href="../articles/dataset.html">Working with multi-file data sets</a>
     <a class="dropdown-item" href="../articles/python.html">Integrating Arrow, Python, and R</a>
-    <a class="dropdown-item" href="../articles/cloud_storage.html">Using cloud storage (S3, GCS)</a>
-    <a class="dropdown-item" href="../articles/flight.html">Connecting to a flight server</a>
+    <a class="dropdown-item" href="../articles/fs.html">Using cloud storage (S3, GCS)</a>
+    <a class="dropdown-item" href="../articles/flight.html">Connecting to a Flight server</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Arrow concepts</h6>
     <a class="dropdown-item" href="../articles/data_objects.html">Data objects</a>
@@ -68,7 +68,7 @@ vctrs extension type is probably sufficient."><meta property="og:image" content=
     <a class="dropdown-item" href="../articles/package_conventions.html">Package conventions</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Installation</h6>
-    <a class="dropdown-item" href="../articles/install_linux.html">Installing on Linux</a>
+    <a class="dropdown-item" href="../articles/install.html">Installing on Linux</a>
     <a class="dropdown-item" href="../articles/install_nightly.html">Installing development versions</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/index.html">More articles...</a>
@@ -87,7 +87,7 @@ vctrs extension type is probably sufficient."><meta property="og:image" content=
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Extension types</h1>
+      <img src="" class="logo" alt=""><h1>Extension types</h1>
       <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/R/extension.R" class="external-link"><code>R/extension.R</code></a></small>
       <div class="d-none name"><code>new_extension_type.Rd</code></div>
     </div>
@@ -250,7 +250,7 @@ extension type that uses most of these features, see
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Create Array objects and use them!</span></span>
 <span class="r-in"><span class="op">(</span><span class="va">vals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">5</span>, min <span class="op">=</span> <span class="fl">19</span>, max <span class="op">=</span> <span class="fl">21</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 19.33048 20.13961 19.72168 20.69034 20.18302</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 20.04296 19.62079 20.73365 19.70285 20.42263</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="op">(</span><span class="va">array</span> <span class="op">&lt;-</span> <span class="fu">quantized_array</span><span class="op">(</span></span>
 <span class="r-in">  <span class="va">vals</span>,</span>
@@ -262,11 +262,11 @@ extension type that uses most of these features, see
 <span class="r-out co"><span class="r-pr">#&gt;</span> ExtensionArray</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;QuantizedType &lt;20;32767&gt;&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -21938,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   4574,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -9119,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   22620,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   5997</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   1407,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -12425,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   24039,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -9736,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   13848</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ]</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">array</span><span class="op">$</span><span class="va">type</span><span class="op">$</span><span class="fu">center</span><span class="op">(</span><span class="op">)</span></span>
@@ -275,7 +275,7 @@ extension type that uses most of these features, see
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 32767</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">array</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 19.33048 20.13959 19.72170 20.69033 20.18302</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 20.04294 19.62081 20.73363 19.70287 20.42262</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

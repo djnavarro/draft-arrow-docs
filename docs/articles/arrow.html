@@ -53,7 +53,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">Arrow R Package</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">9.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">10.0.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,8 +76,8 @@
     <a class="dropdown-item" href="../articles/data_wrangling.html">Data analysis with dplyr syntax</a>
     <a class="dropdown-item" href="../articles/dataset.html">Working with multi-file data sets</a>
     <a class="dropdown-item" href="../articles/python.html">Integrating Arrow, Python, and R</a>
-    <a class="dropdown-item" href="../articles/cloud_storage.html">Using cloud storage (S3, GCS)</a>
-    <a class="dropdown-item" href="../articles/flight.html">Connecting to a flight server</a>
+    <a class="dropdown-item" href="../articles/fs.html">Using cloud storage (S3, GCS)</a>
+    <a class="dropdown-item" href="../articles/flight.html">Connecting to a Flight server</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Arrow concepts</h6>
     <a class="dropdown-item" href="../articles/data_objects.html">Data objects</a>
@@ -86,7 +86,7 @@
     <a class="dropdown-item" href="../articles/package_conventions.html">Package conventions</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Installation</h6>
-    <a class="dropdown-item" href="../articles/install_linux.html">Installing on Linux</a>
+    <a class="dropdown-item" href="../articles/install.html">Installing on Linux</a>
     <a class="dropdown-item" href="../articles/install_nightly.html">Installing development versions</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/index.html">More articles...</a>
@@ -112,7 +112,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Get started with Arrow</h1>
+      <img src="" class="logo" alt=""><h1>Get started with Arrow</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/vignettes/arrow.Rmd" class="external-link"><code>vignettes/arrow.Rmd</code></a></small>
@@ -129,7 +129,7 @@ language to another.</p>
 <p>The <code>arrow</code> package provides a standard way to use Apache
 Arrow in R. It provides a low-level interface to the <a href="https://arrow.apache.org/docs/cpp" class="external-link">Arrow C++ library</a>, and some
 higher-level tools for working with it in a way designed to feel natural
-to R users. This vignette provides an overview of how the pieces fit
+to R users. This article provides an overview of how the pieces fit
 together, and it describes the conventions that the classes and methods
 follow in R.</p>
 <div class="section level2">
@@ -164,10 +164,9 @@ directly using the <code>Table</code> object</li>
 <code><a href="../reference/read_parquet.html">read_parquet()</a></code> allows you to open Parquet files without
 directly using the <code>ParquetFileReader</code> object</li>
 </ul>
-<p>All the examples used in this vignette rely on this high-level
+<p>All the examples used in this article rely on this high-level
 interface.</p>
-<p>To learn more, see
-<code><a href="../articles/package_conventions.html">vignette("package_conventions", package = "arrow")</a></code>.</p>
+<p>To learn more, see the article on <a href="./package_conventions.html">package conventions</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="tabular-data-in-arrow">Tabular data in Arrow<a class="anchor" aria-label="anchor" href="#tabular-data-in-arrow"></a>
@@ -219,8 +218,7 @@ by the Arrow C++ library: there are also Datasets which are used for
 data stored on-disk rather than in-memory, and Record Batches which are
 fundamental building blocks but not typically used in data analysis.</p>
 <p>To learn more about the different data object classes in
-<code>arrow</code>, see
-<code><a href="../articles/data_objects.html">vignette("data_objects", package = "arrow")</a></code>.</p>
+<code>arrow</code>, see the article on <a href="./data_objects.html">data objects</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="converting-tables-to-data-frames">Converting Tables to data frames<a class="anchor" aria-label="anchor" href="#converting-tables-to-data-frames"></a>
@@ -244,8 +242,8 @@ stored as a timestamp in Arrow becomes a POSIXct vector in R, for
 example. However, there are some instances where the mapping between
 Arrow data types and R data types is not exact and care is required.</p>
 <p>To learn more about data types in Arrow and how they are mapped to R
-data types, see
-<code><a href="../articles/data_types.html">vignette("data_types", package = "arrow")</a></code>.</p>
+data types, see the <a href="./data_types.html">data types</a>
+article.</p>
 </div>
 <div class="section level2">
 <h2 id="reading-and-writing-data">Reading and writing data<a class="anchor" aria-label="anchor" href="#reading-and-writing-data"></a>
@@ -319,7 +317,7 @@ frame (<code>sw_frame</code>) but when we set
 <span class="co">## $vehicles: list&lt;item &lt;string&gt;&gt;</span>
 <span class="co">## $starships: list&lt;item &lt;string&gt;&gt;</span></code></pre>
 <p>To learn more about reading and writing individual data files, see
-<code><a href="../articles/read_write.html">vignette("read_write", package = "arrow")</a></code>.</p>
+the <a href="./read_write.html">read/write article</a>.</p>
 </div>
 <div class="section level3">
 <h3 id="multi-file-data-sets">Multi-file data sets<a class="anchor" aria-label="anchor" href="#multi-file-data-sets"></a>
@@ -352,8 +350,8 @@ folder into which we will write the data files:</p>
 the <code>subset</code> column, and then pass the grouped data to
 <code><a href="../reference/write_dataset.html">write_dataset()</a></code>:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">random_data</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">subset</span><span class="op">)</span> |&gt;
+<code class="sourceCode R"><span class="va">random_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">subset</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="../reference/write_dataset.html">write_dataset</a></span><span class="op">(</span><span class="va">dataset_path</span><span class="op">)</span></code></pre></div>
 <p>This creates a set of 10 files, one for each subset. These files are
 named according to the “hive partitioning” format as shown below:</p>
@@ -380,8 +378,7 @@ set without loading it into memory. We can do this using
 some metadata. However, as discussed in the next section, it is possible
 to analyze the data referred to be <code>dset</code> as if it had been
 loaded.</p>
-<p>To learn more about Arrow Datasets, see
-<code><a href="../articles/dataset.html">vignette("dataset", package = "arrow")</a></code>.</p>
+<p>To learn more about Arrow Datasets, see the <a href="./dataset.html">dataset article</a>.</p>
 </div>
 </div>
 <div class="section level2">
@@ -394,14 +391,14 @@ commands that are understood by the Arrow C++ library, and will
 similarly translate R expressions that appear within a call to a
 <code>dplyr</code> verb. For example, although the <code>dset</code>
 Dataset is not a data frame (and does not store the data values in
-memory), you can still pass it to a <code>dplyt</code> pipeline like the
+memory), you can still pass it to a <code>dplyr</code> pipeline like the
 one shown below:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dset</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">subset</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>mean_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, min_y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">mean_x</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">subset</span><span class="op">)</span> |&gt;
+<code class="sourceCode R"><span class="va">dset</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">subset</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>mean_x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, min_y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">mean_x</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">subset</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 6 × 3</span></span>
 <span class="co">##   subset  mean_x min_y</span>
@@ -417,8 +414,7 @@ pipeline. No actual computations are performed until
 <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> (or the related <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">compute()</a></code> function)
 is called. This “lazy evaluation” makes it possible for the Arrow C++
 compute engine to optimize how the computations are performed.</p>
-<p>To learn more about analyzing Arrow data, see
-<code><a href="../articles/data_wrangling.html">vignette("data_wrangling", package = "arrow")</a></code>.</p>
+<p>To learn more about analyzing Arrow data, see the <a href="./data_wrangling.html">data wrangling article</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="connecting-to-cloud-storage">Connecting to cloud storage<a class="anchor" aria-label="anchor" href="#connecting-to-cloud-storage"></a>
@@ -432,9 +428,9 @@ Cloud Storage (GCS). The example below illustrates how you can use
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bucket</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/s3_bucket.html">s3_bucket</a></span><span class="op">(</span><span class="st">"voltrondata-labs-datasets/nyc-taxi"</span><span class="op">)</span>
 <span class="va">nyc_taxi</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/open_dataset.html">open_dataset</a></span><span class="op">(</span><span class="va">bucket</span><span class="op">)</span></code></pre></div>
-<p>To learn more about the suport for cloud services in
-<code>arrow</code>, see
-<code><a href="../articles/cloud_storage.html">vignette("cloud_storage", package = "arrow")</a></code>.</p>
+<p>To learn more about the support for cloud services in
+<code>arrow</code>, see the <a href="./fs.html">cloud storage</a>
+article.</p>
 </div>
 <div class="section level2">
 <h2 id="efficient-data-interchange-between-r-and-python">Efficient data interchange between R and Python<a class="anchor" aria-label="anchor" href="#efficient-data-interchange-between-r-and-python"></a>
@@ -492,8 +488,8 @@ object stored by the Arrow C++ library) is copied. The data values
 themselves in the same place within memory. The consequence of this is
 that it is much faster to pass an Arrow Table from R to Python than to
 copy a data frame in R to a Pandas DataFrame in Python.</p>
-<p>To learn more about passing Arrow data between R and Python, see
-<code><a href="../articles/python.html">vignette("python", package = "arrow")</a></code>.</p>
+<p>To learn more about passing Arrow data between R and Python, see the
+article on <a href="./python.html">python integrations</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="access-to-arrow-messages-buffers-and-streams">Access to Arrow messages, buffers, and streams<a class="anchor" aria-label="anchor" href="#access-to-arrow-messages-buffers-and-streams"></a>
@@ -517,8 +513,8 @@ this process easier, there are several articles in the
 to <code>arrow</code> developers, but are very unlikely to be needed by
 users.</p>
 <p>For an overview of the development process and a list of related
-articles for developers, see
-<code><a href="../articles/developer_overview.html">vignette("developer_overview", package = "arrow")</a></code>.</p>
+articles for developers, see the <a href="./developing.html">developer
+guide</a>.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

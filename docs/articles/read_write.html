@@ -53,7 +53,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">Arrow R Package</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">9.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">10.0.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,8 +76,8 @@
     <a class="dropdown-item" href="../articles/data_wrangling.html">Data analysis with dplyr syntax</a>
     <a class="dropdown-item" href="../articles/dataset.html">Working with multi-file data sets</a>
     <a class="dropdown-item" href="../articles/python.html">Integrating Arrow, Python, and R</a>
-    <a class="dropdown-item" href="../articles/cloud_storage.html">Using cloud storage (S3, GCS)</a>
-    <a class="dropdown-item" href="../articles/flight.html">Connecting to a flight server</a>
+    <a class="dropdown-item" href="../articles/fs.html">Using cloud storage (S3, GCS)</a>
+    <a class="dropdown-item" href="../articles/flight.html">Connecting to a Flight server</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Arrow concepts</h6>
     <a class="dropdown-item" href="../articles/data_objects.html">Data objects</a>
@@ -86,7 +86,7 @@
     <a class="dropdown-item" href="../articles/package_conventions.html">Package conventions</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Installation</h6>
-    <a class="dropdown-item" href="../articles/install_linux.html">Installing on Linux</a>
+    <a class="dropdown-item" href="../articles/install.html">Installing on Linux</a>
     <a class="dropdown-item" href="../articles/install_nightly.html">Installing development versions</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/index.html">More articles...</a>
@@ -112,7 +112,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Reading and writing data files</h1>
+      <img src="" class="logo" alt=""><h1>Reading and writing data files</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/vignettes/read_write.Rmd" class="external-link"><code>vignettes/read_write.Rmd</code></a></small>
@@ -156,14 +156,14 @@ frames and Arrow Tables:</p>
 </ul>
 <p>All these functions can read and write files in the local filesystem
 or to cloud storage. For more on cloud storage support in
-<code>arrow</code>, see
-<code><a href="../articles/cloud_storage.html">vignette("cloud_storage", package = "arrow")</a></code>.</p>
+<code>arrow</code>, see the <a href="./fs.html">cloud storage
+article</a>.</p>
 <p>The <code>arrow</code> package also supports reading and writing
 multi-file datasets, which enable analysis and processing of
 larger-than-memory data, and provide the ability to partition data into
 smaller chunks without loading the full data into memory. For more
-information on this topic, see
-<code><a href="../articles/dataset.html">vignette("dataset", package = "arrow")</a></code>.</p>
+information on this topic, see the <a href="./dataset.html">dataset
+article</a>.</p>
 <div class="section level2">
 <h2 id="parquet-format">Parquet format<a class="anchor" aria-label="anchor" href="#parquet-format"></a>
 </h2>
@@ -259,8 +259,8 @@ Feather files and when reading those files back into R. This enables
 round-trip writing and reading of <code><a href="https://r-spatial.github.io/sf/reference/sf.html" class="external-link">sf::sf</a></code> objects, R data
 frames with with <code><a href="https://haven.tidyverse.org/reference/labelled.html" class="external-link">haven::labelled</a></code> columns, and data frame
 with other custom attributes. To learn more about how metadata are
-handled in <code>arrow</code>, see
-<code><a href="../articles/metadata.html">vignette("metadata", package = "arrow")</a></code>.</p>
+handled in <code>arrow</code>, the <a href="./metadata.html">metadata
+article</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="feather-format">Feather format<a class="anchor" aria-label="anchor" href="#feather-format"></a>
@@ -379,10 +379,9 @@ below:</p>
 <h2 id="further-reading">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>
 </h2>
 <ul>
-<li>To learn more about cloud storage, see
-<code><a href="../articles/cloud_storage.html">vignette("cloud_storage", package = "arrow")</a></code>.</li>
-<li>To learn more about multi-file datasets, see
-<code><a href="../articles/dataset.html">vignette("dataset", package = "arrow")</a></code>.</li>
+<li>To learn more about cloud storage, see the <a href="./fs.html">cloud
+storage article</a>.</li>
+<li>To learn more about multi-file datasets, see the <a href="./dataset.html">datasets article</a>.</li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

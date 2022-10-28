@@ -28,7 +28,7 @@ all necessary C++ dependencies."><meta property="og:image" content="https://arro
     
     <a class="navbar-brand me-2" href="../index.html">Arrow R Package</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">9.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">10.0.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,8 +50,8 @@ all necessary C++ dependencies."><meta property="og:image" content="https://arro
     <a class="dropdown-item" href="../articles/data_wrangling.html">Data analysis with dplyr syntax</a>
     <a class="dropdown-item" href="../articles/dataset.html">Working with multi-file data sets</a>
     <a class="dropdown-item" href="../articles/python.html">Integrating Arrow, Python, and R</a>
-    <a class="dropdown-item" href="../articles/cloud_storage.html">Using cloud storage (S3, GCS)</a>
-    <a class="dropdown-item" href="../articles/flight.html">Connecting to a flight server</a>
+    <a class="dropdown-item" href="../articles/fs.html">Using cloud storage (S3, GCS)</a>
+    <a class="dropdown-item" href="../articles/flight.html">Connecting to a Flight server</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Arrow concepts</h6>
     <a class="dropdown-item" href="../articles/data_objects.html">Data objects</a>
@@ -60,7 +60,7 @@ all necessary C++ dependencies."><meta property="og:image" content="https://arro
     <a class="dropdown-item" href="../articles/package_conventions.html">Package conventions</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Installation</h6>
-    <a class="dropdown-item" href="../articles/install_linux.html">Installing on Linux</a>
+    <a class="dropdown-item" href="../articles/install.html">Installing on Linux</a>
     <a class="dropdown-item" href="../articles/install_nightly.html">Installing development versions</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/index.html">More articles...</a>
@@ -79,7 +79,7 @@ all necessary C++ dependencies."><meta property="og:image" content="https://arro
 </nav><div class="container template-reference-topic">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Install or upgrade the Arrow library</h1>
+      <img src="" class="logo" alt=""><h1>Install or upgrade the Arrow library</h1>
       <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/R/install-arrow.R" class="external-link"><code>R/install-arrow.R</code></a></small>
       <div class="d-none name"><code>install_arrow.Rd</code></div>
     </div>
@@ -117,8 +117,9 @@ The default value, <code>TRUE</code>, tells the installation script to detect th
 Linux distribution and version and find an appropriate C++ library. <code>FALSE</code>
 would tell the script not to retrieve a binary and instead build Arrow C++
 from source. Other valid values are strings corresponding to a Linux
-distribution-version, to override the value that would be detected.
-See <code><a href="https://arrow.apache.org/docs/r/articles/install.html">vignette("install", package = "arrow")</a></code> for further details.</p></dd>
+distribution-version, to override the value that would be detected. See the
+<a href="https://arrow.apache.org/docs/r/articles/install.html">install guide</a>
+for further details.</p></dd>
 
 
 <dt>use_system</dt>
@@ -157,8 +158,9 @@ after a successful <code>arrow</code> installation.</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="arrow_info.html">arrow_info()</a></code> to see if the package was configured with
-necessary C++ dependencies. <code><a href="https://arrow.apache.org/docs/r/articles/install.html">vignette("install", package = "arrow")</a></code> for
-more ways to tune installation on Linux.</p></div>
+necessary C++ dependencies.
+<a href="https://arrow.apache.org/docs/r/articles/install.html">install guide</a>
+for more ways to tune installation on Linux.</p></div>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

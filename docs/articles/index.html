@@ -24,7 +24,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">Arrow R Package</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">9.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">10.0.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,8 +46,8 @@
     <a class="dropdown-item" href="../articles/data_wrangling.html">Data analysis with dplyr syntax</a>
     <a class="dropdown-item" href="../articles/dataset.html">Working with multi-file data sets</a>
     <a class="dropdown-item" href="../articles/python.html">Integrating Arrow, Python, and R</a>
-    <a class="dropdown-item" href="../articles/cloud_storage.html">Using cloud storage (S3, GCS)</a>
-    <a class="dropdown-item" href="../articles/flight.html">Connecting to a flight server</a>
+    <a class="dropdown-item" href="../articles/fs.html">Using cloud storage (S3, GCS)</a>
+    <a class="dropdown-item" href="../articles/flight.html">Connecting to a Flight server</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Arrow concepts</h6>
     <a class="dropdown-item" href="../articles/data_objects.html">Data objects</a>
@@ -56,7 +56,7 @@
     <a class="dropdown-item" href="../articles/package_conventions.html">Package conventions</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Installation</h6>
-    <a class="dropdown-item" href="../articles/install_linux.html">Installing on Linux</a>
+    <a class="dropdown-item" href="../articles/install.html">Installing on Linux</a>
     <a class="dropdown-item" href="../articles/install_nightly.html">Installing development versions</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/index.html">More articles...</a>
@@ -75,7 +75,7 @@
 </nav><div class="container template-article-index">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Articles</h1>
+      <img src="" class="logo" alt=""><h1>Articles</h1>
     </div>
 
     <div class="section ">
@@ -90,9 +90,9 @@
         <dd><p>Learn how to use Datasets to read, write, and analyze multi-file larger-than-memory data</p>
         </dd><dt><a href="python.html">Integrating Arrow, Python, and R</a></dt>
         <dd><p>Learn how to use <code>arrow</code> and <code>reticulate</code> to efficiently transfer data between R and Python without making unnecessary copies</p>
-        </dd><dt><a href="cloud_storage.html">Using cloud storage (S3, GCS)</a></dt>
+        </dd><dt><a href="fs.html">Using cloud storage (S3, GCS)</a></dt>
         <dd><p>Learn how to work with data sets stored in an Amazon S3 bucket or on Google Cloud Storage</p>
-        </dd><dt><a href="flight.html">Connecting to a flight server</a></dt>
+        </dd><dt><a href="flight.html">Connecting to a Flight server</a></dt>
         <dd><p>Learn how to efficiently stream Apache Arrow data objects across a network using Arrow Flight</p>
       </dd></dl></div>
     <div class="section ">
@@ -112,7 +112,7 @@
       <h3>Installation</h3>
       <p class="section-desc"></p>
 
-      <dl><dt><a href="install_linux.html">Installing on Linux</a></dt>
+      <dl><dt><a href="install.html">Installing on Linux</a></dt>
         <dd><p>Installing <code>arrow</code> on linux usually “just works”, but occasionally poses problems. Learn how to handle installation problems if and when they arise</p>
         </dd><dt><a href="install_nightly.html">Installing development versions</a></dt>
         <dd><p>Learn how to install nightly builds of <code>arrow</code></p>
@@ -121,21 +121,21 @@
       <h3>Developer guides</h3>
       <p class="section-desc"></p>
 
-      <dl><dt><a href="developer_overview.html">Introduction for developers</a></dt>
+      <dl><dt><a href="developing.html">Introduction for developers</a></dt>
         <dd><p>Learn how to contribute to the <code>arrow</code> package</p>
-        </dd><dt><a href="developer_environment.html">Configuring a developer environment</a></dt>
+        </dd><dt><a href="developers/setup.html">Configuring a developer environment</a></dt>
         <dd><p>Learn how to configure your environment to allow you to contribute to the <code>arrow</code> package</p>
-        </dd><dt><a href="developer_workflow.html">Developer workflows</a></dt>
+        </dd><dt><a href="developers/workflow.html">Developer workflows</a></dt>
         <dd><p>Learn about the workflows and conventions followed by <code>arrow</code> developers</p>
-        </dd><dt><a href="debugging_arrow.html">Debugging strategies</a></dt>
+        </dd><dt><a href="developers/debugging.html">Debugging strategies</a></dt>
         <dd><p>Tools and strategies to help <code>arrow</code> developers with debugging</p>
-        </dd><dt><a href="docker.html">Using docker containers</a></dt>
+        </dd><dt><a href="developers/docker.html">Using docker containers</a></dt>
         <dd><p>A guide for <code>arrow</code> developers wanting to use docker</p>
-        </dd><dt><a href="writing_bindings.html">Writing dplyr bindings</a></dt>
+        </dd><dt><a href="developers/writing_bindings.html">Writing dplyr bindings</a></dt>
         <dd><p>Learn how to write bindings that allow <code>arrow</code> to mirror the behavior of native R functions within <code>dplyr</code> pipelines</p>
-        </dd><dt><a href="install_details.html">Installation details</a></dt>
+        </dd><dt><a href="developers/install_details.html">Installation details</a></dt>
         <dd><p>A low-level description of <code>arrow</code> installation intended for developers</p>
-        </dd><dt><a href="data_object_layout.html">Internal structure of Arrow objects</a></dt>
+        </dd><dt><a href="developers/data_object_layout.html">Internal structure of Arrow objects</a></dt>
         <dd><p>Learn about the internal structure of Arrow data objects.</p>
       </dd></dl></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

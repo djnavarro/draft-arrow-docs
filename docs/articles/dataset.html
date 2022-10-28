@@ -53,7 +53,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">Arrow R Package</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">9.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">10.0.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,8 +76,8 @@
     <a class="dropdown-item" href="../articles/data_wrangling.html">Data analysis with dplyr syntax</a>
     <a class="dropdown-item" href="../articles/dataset.html">Working with multi-file data sets</a>
     <a class="dropdown-item" href="../articles/python.html">Integrating Arrow, Python, and R</a>
-    <a class="dropdown-item" href="../articles/cloud_storage.html">Using cloud storage (S3, GCS)</a>
-    <a class="dropdown-item" href="../articles/flight.html">Connecting to a flight server</a>
+    <a class="dropdown-item" href="../articles/fs.html">Using cloud storage (S3, GCS)</a>
+    <a class="dropdown-item" href="../articles/flight.html">Connecting to a Flight server</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Arrow concepts</h6>
     <a class="dropdown-item" href="../articles/data_objects.html">Data objects</a>
@@ -86,7 +86,7 @@
     <a class="dropdown-item" href="../articles/package_conventions.html">Package conventions</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Installation</h6>
-    <a class="dropdown-item" href="../articles/install_linux.html">Installing on Linux</a>
+    <a class="dropdown-item" href="../articles/install.html">Installing on Linux</a>
     <a class="dropdown-item" href="../articles/install_nightly.html">Installing development versions</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/index.html">More articles...</a>
@@ -112,7 +112,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Working with multi-file data sets</h1>
+      <img src="" class="logo" alt=""><h1>Working with multi-file data sets</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/vignettes/dataset.Rmd" class="external-link"><code>vignettes/dataset.Rmd</code></a></small>
@@ -125,7 +125,7 @@
 when that data set is too large to be loaded into memory. With the help
 of Arrow Dataset objects you can analyze this kind of data using
 familiar <a href="https://dplyr.tidyverse.org/" class="external-link"><code>dplyr</code></a>
-syntax. This vignette introduces Datasets and shows you how to analyze
+syntax. This article introduces Datasets and shows you how to analyze
 them with <code>dplyr</code> and <code>arrow</code>: we’ll start by
 ensuring both packages are loaded</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -155,7 +155,7 @@ individual files are &lt;1MB in size, and the “tiny” data set is only
 70MB)</p>
 <p>If you have Amazon S3 and/or Google Cloud Storage support enabled in
 <code>arrow</code> (true for most users; see links at the end of this
-vignette if you need to troubleshoot this), you can connect to the “tiny
+article if you need to troubleshoot this), you can connect to the “tiny
 taxi data” with either of the following commands:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bucket</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/s3_bucket.html">s3_bucket</a></span><span class="op">(</span><span class="st">"voltrondata-labs-datasets/nyc-taxi-tiny"</span><span class="op">)</span>
@@ -171,9 +171,9 @@ using the full data set.</p>
 <code><a href="../reference/copy_files.html">copy_files()</a></code> function:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/copy_files.html">copy_files</a></span><span class="op">(</span>from <span class="op">=</span> <span class="va">bucket</span>, to <span class="op">=</span> <span class="st">"nyc-taxi"</span><span class="op">)</span></code></pre></div>
-<p>For the purposes of this vignette, we assume that the NYC taxi
-dataset (either the full data or the tiny version) has been downloaded
-locally and exists in an <code>"nyc-taxi"</code> directory.</p>
+<p>For the purposes of this article, we assume that the NYC taxi dataset
+(either the full data or the tiny version) has been downloaded locally
+and exists in an <code>"nyc-taxi"</code> directory.</p>
 </div>
 <div class="section level2">
 <h2 id="opening-datasets">Opening Datasets<a class="anchor" aria-label="anchor" href="#opening-datasets"></a>
@@ -187,8 +187,7 @@ loaded into memory. Instead, Arrow scans the data directory to find
 relevant files, parses the file paths looking for a “Hive-style
 partitioning” (see below), and reads headers of the data files to
 construct a Schema that contains metadata describing the structure of
-the data. For more information about Schemas see
-<code><a href="../articles/metadata.html">vignette("metadata", package = "arrow")</a></code>.</p>
+the data. For more information about Schemas see the <a href="./metadata.html">metadata article</a>.</p>
 <p>Two questions naturally follow from this: what kind of files does
 <code><a href="../reference/open_dataset.html">open_dataset()</a></code> look for, and what structure does it expect
 to find in the file paths? Let’s start by looking at the file types.</p>
@@ -299,16 +298,16 @@ suppose you are curious about tipping behavior in the longest taxi
 rides. Let’s find the median tip percentage for rides with fares greater
 than $100 in 2015, broken down by the number of passengers:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">ds</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">total_amount</span> <span class="op">&gt;</span> <span class="fl">100</span>, <span class="va">year</span> <span class="op">==</span> <span class="fl">2015</span><span class="op">)</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">tip_amount</span>, <span class="va">total_amount</span>, <span class="va">passenger_count</span><span class="op">)</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>tip_pct <span class="op">=</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">tip_amount</span> <span class="op">/</span> <span class="va">total_amount</span><span class="op">)</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">passenger_count</span><span class="op">)</span> |&gt;
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">ds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">total_amount</span> <span class="op">&gt;</span> <span class="fl">100</span>, <span class="va">year</span> <span class="op">==</span> <span class="fl">2015</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">tip_amount</span>, <span class="va">total_amount</span>, <span class="va">passenger_count</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>tip_pct <span class="op">=</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">tip_amount</span> <span class="op">/</span> <span class="va">total_amount</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">passenger_count</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>
     median_tip_pct <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">tip_pct</span><span class="op">)</span>,
     n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>
-  <span class="op">)</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect</a></span><span class="op">(</span><span class="op">)</span> |&gt;
+  <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## </span>
 <span class="co">## # A tibble: 10 x 3</span>
@@ -338,11 +337,11 @@ record their actions but do not evaluate those actions on the data until
 you run <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code>. We can see this by taking the same code
 as before and leaving off the final step:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">total_amount</span> <span class="op">&gt;</span> <span class="fl">100</span>, <span class="va">year</span> <span class="op">==</span> <span class="fl">2015</span><span class="op">)</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">tip_amount</span>, <span class="va">total_amount</span>, <span class="va">passenger_count</span><span class="op">)</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>tip_pct <span class="op">=</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">tip_amount</span> <span class="op">/</span> <span class="va">total_amount</span><span class="op">)</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">passenger_count</span><span class="op">)</span> |&gt;
+<code class="sourceCode R"><span class="va">ds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">total_amount</span> <span class="op">&gt;</span> <span class="fl">100</span>, <span class="va">year</span> <span class="op">==</span> <span class="fl">2015</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">tip_amount</span>, <span class="va">total_amount</span>, <span class="va">passenger_count</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>tip_pct <span class="op">=</span> <span class="fl">100</span> <span class="op">*</span> <span class="va">tip_amount</span> <span class="op">/</span> <span class="va">total_amount</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">passenger_count</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>
     median_tip_pct <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">tip_pct</span><span class="op">)</span>,
     n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>
@@ -378,9 +377,9 @@ in your query on an Arrow Dataset. In that case, the <code>arrow</code>
 package raises an error. However, for <code>dplyr</code> queries on
 Arrow Table objects (which are already in-memory), the package
 automatically calls <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> before processing that
-<code>dplyr</code> verb. To learn more about the <code>dplyr</code>
-backend, see
-<code><a href="../articles/data_wrangling.html">vignette("data_wrangling", package = "arrow")</a></code>.</p>
+<code>dplyr</code> verb. To learn more about the <code>dplyr</code> back
+end, see the <a href="./data_wrangling.html">data wrangling
+article</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="batch-processing-experimental">Batch processing (experimental)<a class="anchor" aria-label="anchor" href="#batch-processing-experimental"></a>
@@ -394,11 +393,11 @@ not recommended for production use.</p>
 <code>map_batches</code> to sample a percentage of rows from each
 batch:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sampled_data</span> <span class="op">&lt;-</span> <span class="va">ds</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2015</span><span class="op">)</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">tip_amount</span>, <span class="va">total_amount</span>, <span class="va">passenger_count</span><span class="op">)</span> |&gt;
-  <span class="fu"><a href="../reference/map_batches.html">map_batches</a></span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="../reference/as_record_batch.html">as_record_batch</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html" class="external-link">sample_frac</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="fl">1e-4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>tip_pct <span class="op">=</span> <span class="va">tip_amount</span> <span class="op">/</span> <span class="va">total_amount</span><span class="op">)</span> |&gt;
+<code class="sourceCode R"><span class="va">sampled_data</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2015</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">tip_amount</span>, <span class="va">total_amount</span>, <span class="va">passenger_count</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="../reference/map_batches.html">map_batches</a></span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="../reference/as_record_batch.html">as_record_batch</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html" class="external-link">sample_frac</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, <span class="fl">1e-4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>tip_pct <span class="op">=</span> <span class="va">tip_amount</span> <span class="op">/</span> <span class="va">total_amount</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">sampled_data</span><span class="op">)</span></code></pre></div>
@@ -416,19 +415,19 @@ compute the MSE on the full Dataset.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">tip_pct</span> <span class="op">~</span> <span class="va">total_amount</span> <span class="op">+</span> <span class="va">passenger_count</span>, data <span class="op">=</span> <span class="va">sampled_data</span><span class="op">)</span>
 
-<span class="va">ds</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2015</span><span class="op">)</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">tip_amount</span>, <span class="va">total_amount</span>, <span class="va">passenger_count</span><span class="op">)</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>tip_pct <span class="op">=</span> <span class="va">tip_amount</span> <span class="op">/</span> <span class="va">total_amount</span><span class="op">)</span> |&gt;
+<span class="va">ds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2015</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">tip_amount</span>, <span class="va">total_amount</span>, <span class="va">passenger_count</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>tip_pct <span class="op">=</span> <span class="va">tip_amount</span> <span class="op">/</span> <span class="va">total_amount</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="../reference/map_batches.html">map_batches</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">batch</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">batch</span> |&gt;
-      <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> |&gt;
-      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>pred_tip_pct <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">model</span>, newdata <span class="op">=</span> <span class="va">.</span><span class="op">)</span><span class="op">)</span> |&gt;
-      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html" class="external-link">is.nan</a></span><span class="op">(</span><span class="va">tip_pct</span><span class="op">)</span><span class="op">)</span> |&gt;
-      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>sse_partial <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">pred_tip_pct</span> <span class="op">-</span> <span class="va">tip_pct</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>, n_partial <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> |&gt;
+    <span class="va">batch</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>pred_tip_pct <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">model</span>, newdata <span class="op">=</span> <span class="va">.</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html" class="external-link">is.nan</a></span><span class="op">(</span><span class="va">tip_pct</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>sse_partial <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">pred_tip_pct</span> <span class="op">-</span> <span class="va">tip_pct</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span>, n_partial <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
       <span class="fu"><a href="../reference/as_record_batch.html">as_record_batch</a></span><span class="op">(</span><span class="op">)</span>
-  <span class="op">}</span><span class="op">)</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>mse <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">sse_partial</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">n_partial</span><span class="op">)</span><span class="op">)</span> |&gt;
+  <span class="op">}</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>mse <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">sse_partial</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">n_partial</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">mse</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## </span>
 <span class="co">## [1] 0.1304284</span></code></pre>
@@ -515,8 +514,8 @@ where <code>payment_type</code> is always <code>"Cash"</code>.</p>
 <p>One natural way to express the columns you want to partition on is to
 use the <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code> method:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">payment_type</span><span class="op">)</span> |&gt;
+<code class="sourceCode R"><span class="va">ds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">payment_type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="../reference/write_dataset.html">write_dataset</a></span><span class="op">(</span><span class="st">"nyc-taxi/feather"</span>, format <span class="op">=</span> <span class="st">"feather"</span><span class="op">)</span></code></pre></div>
 <p>This will write files to a directory tree that looks like this:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
@@ -544,17 +543,17 @@ you ever care about, and you just want to drop the rest and have a
 smaller working set. For this, you can <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code> them out
 when writing:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">payment_type</span> <span class="op">==</span> <span class="st">"Cash"</span><span class="op">)</span> |&gt;
+<code class="sourceCode R"><span class="va">ds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">payment_type</span> <span class="op">==</span> <span class="st">"Cash"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="../reference/write_dataset.html">write_dataset</a></span><span class="op">(</span><span class="st">"nyc-taxi/feather"</span>, format <span class="op">=</span> <span class="st">"feather"</span><span class="op">)</span></code></pre></div>
 <p>The other thing you can do when writing Datasets is select a subset
 of columns or reorder them. Suppose you never care about
 <code>vendor_id</code>, and being a string column, it can take up a lot
 of space when you read it in, so let’s drop it:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">payment_type</span><span class="op">)</span> |&gt;
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">vendor_id</span><span class="op">)</span> |&gt;
+<code class="sourceCode R"><span class="va">ds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">payment_type</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">vendor_id</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="../reference/write_dataset.html">write_dataset</a></span><span class="op">(</span><span class="st">"nyc-taxi/feather"</span>, format <span class="op">=</span> <span class="st">"feather"</span><span class="op">)</span></code></pre></div>
 <p>Note that while you can select a subset of columns, you cannot
 currently rename columns when writing a Dataset.</p>
@@ -624,19 +623,16 @@ The CSV file format does not have any such concept and a partially
 written CSV file may be detected as valid.</p>
 </div>
 <div class="section level2">
-<h2 id="futher-reading">Futher reading<a class="anchor" aria-label="anchor" href="#futher-reading"></a>
+<h2 id="further-reading">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>
 </h2>
 <ul>
-<li>To learn about cloud storage, see
-<code><a href="../articles/cloud_storage.html">vignette("cloud_storage", package = "arrow")</a></code>.</li>
-<li>To learn about <code>dplyr</code> with <code>arrow</code>, see
-<code><a href="../articles/data_wrangling.html">vignette("data_wrangling", package = "arrow")</a></code>.</li>
-<li>To learn about reading and writing data, see
-<code><a href="../articles/read_write.html">vignette("read_write", package = "arrow")</a></code>.</li>
-<li>To manually enable cloud support on Linux, see
-<code><a href="../articles/install_linux.html">vignette("install_linux", package = "arrow")</a></code>.</li>
-<li>To learn about schemas and metadata, see
-<code><a href="../articles/metadata.html">vignette("metadata", package = "arrow")</a></code>.</li>
+<li>To learn about cloud storage, see the <a href="./fs.html">cloud
+storage article</a>.</li>
+<li>To learn about <code>dplyr</code> with <code>arrow</code>, see the
+<a href="./data_wrangling.html">data wrangling article</a>.</li>
+<li>To learn about reading and writing data, see the <a href="./read_write.html">read/write article</a>.</li>
+<li>To manually enable cloud support on Linux, see the article on <a href="./install.html">installation on Linux</a>.</li>
+<li>To learn about schemas and metadata, see the <a href="./metadata.html">metadata article</a>.</li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

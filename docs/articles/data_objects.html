@@ -53,7 +53,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">Arrow R Package</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">9.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">10.0.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,8 +76,8 @@
     <a class="dropdown-item" href="../articles/data_wrangling.html">Data analysis with dplyr syntax</a>
     <a class="dropdown-item" href="../articles/dataset.html">Working with multi-file data sets</a>
     <a class="dropdown-item" href="../articles/python.html">Integrating Arrow, Python, and R</a>
-    <a class="dropdown-item" href="../articles/cloud_storage.html">Using cloud storage (S3, GCS)</a>
-    <a class="dropdown-item" href="../articles/flight.html">Connecting to a flight server</a>
+    <a class="dropdown-item" href="../articles/fs.html">Using cloud storage (S3, GCS)</a>
+    <a class="dropdown-item" href="../articles/flight.html">Connecting to a Flight server</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Arrow concepts</h6>
     <a class="dropdown-item" href="../articles/data_objects.html">Data objects</a>
@@ -86,7 +86,7 @@
     <a class="dropdown-item" href="../articles/package_conventions.html">Package conventions</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Installation</h6>
-    <a class="dropdown-item" href="../articles/install_linux.html">Installing on Linux</a>
+    <a class="dropdown-item" href="../articles/install.html">Installing on Linux</a>
     <a class="dropdown-item" href="../articles/install_nightly.html">Installing development versions</a>
     <div class="dropdown-divider"></div>
     <a class="dropdown-item" href="../articles/index.html">More articles...</a>
@@ -112,7 +112,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Data objects</h1>
+      <img src="" class="logo" alt=""><h1>Data objects</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/apache/arrow/blob/master/r/vignettes/data_objects.Rmd" class="external-link"><code>vignettes/data_objects.Rmd</code></a></small>
@@ -121,7 +121,7 @@
 
     
     
-<p>This vignette describes the various data object types supplied by
+<p>This article describes the various data object types supplied by
 <code>arrow</code>, and documents how these objects are structured.</p>
 <p>The <code>arrow</code> package supplies several object classes that
 are used to represent data. <code>RecordBatch</code>,
@@ -186,7 +186,7 @@ functionality in a more traditional R-like fashion:</p>
 </tr>
 </tbody>
 </table>
-<p>Later in the vignette we’ll look at each of these in more detail.</p>
+<p>Later in the article we’ll look at each of these in more detail.</p>
 <p>For now we note that each of these object classes corresponds to a
 class of the same name in the underlying Arrow C++ library. It is also
 worth mentioning that the <code>arrow</code> package also defines
@@ -213,8 +213,7 @@ to describe the structure of a tabular data object; where</li>
 <li>A <code>DataType</code> is an attribute controlling how values are
 represented</li>
 </ul>
-<p>To learn more about the metadata classes, see
-<code><a href="../articles/metadata.html">vignette("metadata", package = "arrow")</a></code>.</p>
+<p>To learn more about the metadata classes, see the <a href="./metadata.html">metadata article</a>.</p>
 <div class="section level2">
 <h2 id="scalars">Scalars<a class="anchor" aria-label="anchor" href="#scalars"></a>
 </h2>
@@ -279,10 +278,9 @@ cannot be modified or extended.</p>
 likely to use Chunked Arrays rather than simple Arrays. Under the hood,
 a Chunked Array is a collection of one or more Arrays that can be
 indexed <em>as if</em> they were a single Array. The reasons that Arrow
-provides this functionality are described in
-<code><a href="../articles/data_object_layout.html">vignette("data_object_layout", package = "arrow")</a></code> but for
-the present purposes it is sufficient to notice that Chunked Arrays
-behave like Arrays in regular data analysis.</p>
+provides this functionality are described in the <a href="./developers/data_object_layout.html">data object layout
+article</a> but for the present purposes it is sufficient to notice that
+Chunked Arrays behave like Arrays in regular data analysis.</p>
 <p>To illustrate, let’s use the <code><a href="../reference/ChunkedArray.html">chunked_array()</a></code>
 function:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -515,16 +513,14 @@ Tables:</p>
 <h2 id="further-reading">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>
 </h2>
 <ul>
-<li>To learn more about the internal structure of Arrays, see
-<code><a href="../articles/data_object_layout.html">vignette("data_object_layout", package = "arrow")</a></code>
-</li>
+<li>To learn more about the internal structure of Arrays, see the
+article on <a href="./developers/data_object_layout.html">data object
+layout</a>.</li>
 <li>To learn more about the different data types that can be represented
-in Arrow, see
-<code><a href="../articles/data_types.html">vignette("data_types", package = "arrow")</a></code>
-</li>
+in Arrow, see the article on <a href="./data_types.html">data
+types</a>.</li>
 <li>To learn more about how Arrow objects are implemented, see the <a href="https://arrow.apache.org/docs/format/Columnar.html" class="external-link">Arrow
-specification</a>
-</li>
+specification</a> page.</li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
