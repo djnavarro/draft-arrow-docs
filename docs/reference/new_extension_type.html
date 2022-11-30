@@ -65,7 +65,6 @@ vctrs extension type is probably sufficient."><meta property="og:image" content=
     <a class="dropdown-item" href="../articles/data_objects.html">Data objects</a>
     <a class="dropdown-item" href="../articles/data_types.html">Data types</a>
     <a class="dropdown-item" href="../articles/metadata.html">Metadata</a>
-    <a class="dropdown-item" href="../articles/package_conventions.html">Package conventions</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Installation</h6>
     <a class="dropdown-item" href="../articles/install.html">Installing on Linux</a>
@@ -250,7 +249,7 @@ extension type that uses most of these features, see
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># Create Array objects and use them!</span></span>
 <span class="r-in"><span class="op">(</span><span class="va">vals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">5</span>, min <span class="op">=</span> <span class="fl">19</span>, max <span class="op">=</span> <span class="fl">21</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 20.04296 19.62079 20.73365 19.70285 20.42263</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 20.44552 19.60036 19.36488 19.45266 19.21557</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="op">(</span><span class="va">array</span> <span class="op">&lt;-</span> <span class="fu">quantized_array</span><span class="op">(</span></span>
 <span class="r-in">  <span class="va">vals</span>,</span>
@@ -262,11 +261,11 @@ extension type that uses most of these features, see
 <span class="r-out co"><span class="r-pr">#&gt;</span> ExtensionArray</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;QuantizedType &lt;20;32767&gt;&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   1407,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -12425,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   24039,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   -9736,</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   13848</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   14598,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -13094,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -20810,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -17934,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -25703</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ]</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">array</span><span class="op">$</span><span class="va">type</span><span class="op">$</span><span class="fu">center</span><span class="op">(</span><span class="op">)</span></span>
@@ -275,7 +274,7 @@ extension type that uses most of these features, see
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 32767</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">array</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 20.04294 19.62081 20.73363 19.70287 20.42262</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 20.44551 19.60039 19.36491 19.45268 19.21558</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

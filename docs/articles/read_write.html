@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Learn how to read and write CSV, Parquet, and Feather files with `arrow` 
+<meta name="description" content="Learn how to read and write CSV, Parquet, and Feather files with arrow 
 ">
 <title>Reading and writing data files • Arrow R Package</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -19,7 +19,7 @@
 <script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><script src="../extra.js"></script><meta property="og:title" content="Reading and writing data files">
-<meta property="og:description" content="Learn how to read and write CSV, Parquet, and Feather files with `arrow` 
+<meta property="og:description" content="Learn how to read and write CSV, Parquet, and Feather files with arrow 
 ">
 <meta property="og:image" content="https://arrow.apache.org/img/arrow-logo_horizontal_black-txt_white-bg.png">
 <meta property="og:image:alt" content="Apache Arrow logo, displaying the triple chevron image adjacent to the text">
@@ -83,7 +83,6 @@
     <a class="dropdown-item" href="../articles/data_objects.html">Data objects</a>
     <a class="dropdown-item" href="../articles/data_types.html">Data types</a>
     <a class="dropdown-item" href="../articles/metadata.html">Metadata</a>
-    <a class="dropdown-item" href="../articles/package_conventions.html">Package conventions</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Installation</h6>
     <a class="dropdown-item" href="../articles/install.html">Installing on Linux</a>
@@ -121,16 +120,16 @@
 
     
     
-<p>The <code>arrow</code> package provides functions for reading single
-data files in several common formats. By default, calling any of these
+<p>The arrow package provides functions for reading single data files
+into memory, in several common formats. By default, calling any of these
 functions returns an R data frame. To return an Arrow Table, set
 argument <code>as_data_frame = FALSE</code>.</p>
 <ul>
 <li>
 <code><a href="../reference/read_parquet.html">read_parquet()</a></code>: read a file in Parquet format</li>
 <li>
-<code><a href="../reference/read_feather.html">read_feather()</a></code>: read a file in Feather format (the
-Apache Arrow IPC format)</li>
+<code><a href="../reference/read_feather.html">read_feather()</a></code>: read a file in the Apache Arrow IPC
+format (formerly called the Feather format)</li>
 <li>
 <code><a href="../reference/read_delim_arrow.html">read_delim_arrow()</a></code>: read a delimited text file (default
 delimiter is comma)</li>
@@ -143,27 +142,25 @@ file</li>
 <li>
 <code><a href="../reference/read_json_arrow.html">read_json_arrow()</a></code>: read a JSON data file</li>
 </ul>
-<p>For writing data to single files, the <code>arrow</code> package
-provides the following functions, which can be used with both R data
-frames and Arrow Tables:</p>
+<p>For writing data to single files, the arrow package provides the
+following functions, which can be used with both R data frames and Arrow
+Tables:</p>
 <ul>
 <li>
 <code><a href="../reference/write_parquet.html">write_parquet()</a></code>: write a file in Parquet format</li>
 <li>
-<code><a href="../reference/write_feather.html">write_feather()</a></code>: write a file in Feather format</li>
+<code><a href="../reference/write_feather.html">write_feather()</a></code>: write a file in Arrow IPC format</li>
 <li>
 <code><a href="../reference/write_csv_arrow.html">write_csv_arrow()</a></code>: write a file in CSV format</li>
 </ul>
 <p>All these functions can read and write files in the local filesystem
-or to cloud storage. For more on cloud storage support in
-<code>arrow</code>, see the <a href="./fs.html">cloud storage
-article</a>.</p>
-<p>The <code>arrow</code> package also supports reading and writing
-multi-file datasets, which enable analysis and processing of
-larger-than-memory data, and provide the ability to partition data into
-smaller chunks without loading the full data into memory. For more
-information on this topic, see the <a href="./dataset.html">dataset
-article</a>.</p>
+or to cloud storage. For more on cloud storage support in arrow, see the
+<a href="./fs.html">cloud storage article</a>.</p>
+<p>The arrow package also supports reading larger-than-memory single
+data files, and reading and writing multi-file data sets. This enables
+analysis and processing of larger-than-memory data, and provides the
+ability to partition data into smaller chunks without loading the full
+data into memory. For more information on this topic, see the <a href="./dataset.html">dataset article</a>.</p>
 <div class="section level2">
 <h2 id="parquet-format">Parquet format<a class="anchor" aria-label="anchor" href="#parquet-format"></a>
 </h2>
@@ -171,11 +168,10 @@ article</a>.</p>
 choice for storing analytics data; it is a binary format that is
 optimized for reduced file sizes and fast read performance, especially
 for column-based access patterns. The simplest way to read and write
-Parquet data using <code>arrow</code> is with the
-<code><a href="../reference/read_parquet.html">read_parquet()</a></code> and <code><a href="../reference/write_parquet.html">write_parquet()</a></code> functions.
-To illustrate this, we’ll write the <code>starwars</code> data included
-in <code>dplyr</code> to a Parquet file, then read it back in. First
-load the <code>arrow</code> and <code>dplyr</code> packages:</p>
+Parquet data using arrow is with the <code><a href="../reference/read_parquet.html">read_parquet()</a></code> and
+<code><a href="../reference/write_parquet.html">write_parquet()</a></code> functions. To illustrate this, we’ll write
+the <code>starwars</code> data included in dplyr to a Parquet file, then
+read it back in. First load the arrow and dplyr packages:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/apache/arrow/" class="external-link">arrow</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
@@ -186,9 +182,9 @@ load the <code>arrow</code> and <code>dplyr</code> packages:</p>
 <span class="fu"><a href="../reference/write_parquet.html">write_parquet</a></span><span class="op">(</span><span class="va">starwars</span>, <span class="va">file_path</span><span class="op">)</span></code></pre></div>
 <p>The size of a Parquet file is typically much smaller than the
 corresponding CSV file would have been. This is in part due to the use
-of file compression: by default, Parquet files written with the
-<code>arrow</code> package use <a href="https://google.github.io/snappy/" class="external-link">Snappy compression</a> but other
-options such as gzip are also supported. See
+of file compression: by default, Parquet files written with the arrow
+package use <a href="https://google.github.io/snappy/" class="external-link">Snappy
+compression</a> but other options such as gzip are also supported. See
 <code><a href="../reference/write_parquet.html">help("write_parquet", package = "arrow")</a></code> for more
 information.</p>
 <p>Having written the Parquet file, we now can read it with
@@ -237,7 +233,7 @@ column-wise, and contain metadata that allow file readers to skip to the
 relevant sections of the file. That means it is possible to load only a
 subset of the columns without reading the complete file. The
 <code>col_select</code> argument to <code><a href="../reference/read_parquet.html">read_parquet()</a></code> supports
-this functionality is supported in <code>arrow</code>:</p>
+this functionality:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/read_parquet.html">read_parquet</a></span><span class="op">(</span><span class="va">file_path</span>, col_select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"height"</span>, <span class="st">"mass"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 87 × 3</span></span>
@@ -254,29 +250,33 @@ this functionality is supported in <code>arrow</code>:</p>
 <span class="co">## <span style="color: #BCBCBC;"> 9</span> Biggs Darklighter     183    84</span>
 <span class="co">## <span style="color: #BCBCBC;">10</span> Obi-Wan Kenobi        182    77</span>
 <span class="co">## <span style="color: #949494;"># … with 77 more rows</span></span></code></pre>
+<p>Fine-grained control over the Parquet reader is possible with the
+<code>props</code> argument. See
+<code><a href="../reference/ParquetArrowReaderProperties.html">help("ParquetArrowReaderProperties", package = "arrow")</a></code> for
+details.</p>
 <p>R object attributes are preserved when writing data to Parquet or
-Feather files and when reading those files back into R. This enables
-round-trip writing and reading of <code><a href="https://r-spatial.github.io/sf/reference/sf.html" class="external-link">sf::sf</a></code> objects, R data
-frames with with <code><a href="https://haven.tidyverse.org/reference/labelled.html" class="external-link">haven::labelled</a></code> columns, and data frame
-with other custom attributes. To learn more about how metadata are
-handled in <code>arrow</code>, the <a href="./metadata.html">metadata
+Arrow/Feather files and when reading those files back into R. This
+enables round-trip writing and reading of <code><a href="https://r-spatial.github.io/sf/reference/sf.html" class="external-link">sf::sf</a></code> objects, R
+data frames with with <code><a href="https://haven.tidyverse.org/reference/labelled.html" class="external-link">haven::labelled</a></code> columns, and data
+frame with other custom attributes. To learn more about how metadata are
+handled in arrow, the <a href="./metadata.html">metadata
 article</a>.</p>
 </div>
 <div class="section level2">
-<h2 id="feather-format">Feather format<a class="anchor" aria-label="anchor" href="#feather-format"></a>
+<h2 id="arrowfeather-format">Arrow/Feather format<a class="anchor" aria-label="anchor" href="#arrowfeather-format"></a>
 </h2>
-<p>The Feather file format was developed to provide binary columnar
+<p>The Arrow file format was developed to provide binary columnar
 serialization for data frames, to make reading and writing data frames
 efficient, and to make sharing data across data analysis languages easy.
-It is closely associated with the Apache Arrow project, and development
-of the original <a href="https://github.com/wesm/feather" class="external-link">Feather</a>
-project has now been moved into the Arrow project itself, and you can
-find the detailed specification of version 2 of the Feather format –
-officially referred to as <a href="https://arrow.apache.org/docs/format/Columnar.html#ipc-file-format" class="external-link">the
-IPC file format</a> – on the Arrow specification page.</p>
-<p>The <code><a href="../reference/write_feather.html">write_feather()</a></code> function writes version 2 Feather
-files by default, and supports multiple kinds of file compression. Basic
-use is shown below:</p>
+This file format is sometimes referred to as Feather because it is an
+outgrowth of the original <a href="https://github.com/wesm/feather" class="external-link">Feather</a> project that has now
+been moved into the Arrow project itself. You can find the detailed
+specification of version 2 of the Arrow format – officially referred to
+as <a href="https://arrow.apache.org/docs/format/Columnar.html#ipc-file-format" class="external-link">the
+Arrow IPC file format</a> – on the Arrow specification page.</p>
+<p>The <code><a href="../reference/write_feather.html">write_feather()</a></code> function writes version 2
+Arrow/Feather files by default, and supports multiple kinds of file
+compression. Basic use is shown below:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">file_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="../reference/write_feather.html">write_feather</a></span><span class="op">(</span><span class="va">starwars</span>, <span class="va">file_path</span><span class="op">)</span></code></pre></div>
@@ -301,12 +301,12 @@ interface for reading feather files:</p>
 <span class="co">## <span style="color: #949494;">#   films &lt;list&lt;character&gt;&gt;, vehicles &lt;list&lt;character&gt;&gt;,</span></span>
 <span class="co">## <span style="color: #949494;">#   starships &lt;list&lt;character&gt;&gt;, and abbreviated variable names ¹​hair_color,</span></span>
 <span class="co">## <span style="color: #949494;">#   ²​skin_color, ³​eye_color, ⁴​birth_year, ⁵​homeworld</span></span></code></pre>
-<p>Like the Parquet reader, the Feather reader supports reading a only
-subset of columns, and can produce Arrow Table output:</p>
+<p>Like the Parquet reader, this reader supports reading a only subset
+of columns, and can produce Arrow Table output:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/read_feather.html">read_feather</a></span><span class="op">(</span>
-  file <span class="op">=</span> <span class="va">file_path</span>, 
-  col_select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"height"</span>, <span class="st">"mass"</span><span class="op">)</span>, 
+  file <span class="op">=</span> <span class="va">file_path</span>,
+  col_select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span>, <span class="st">"height"</span>, <span class="st">"mass"</span><span class="op">)</span>,
   as_data_frame <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Table</span>
@@ -318,22 +318,16 @@ subset of columns, and can produce Arrow Table output:</p>
 <div class="section level2">
 <h2 id="csv-format">CSV format<a class="anchor" aria-label="anchor" href="#csv-format"></a>
 </h2>
-<p>The read/write capabilities of the <code>arrow</code> package also
-include support for CSV and other text-delimited files. The
+<p>The read/write capabilities of the arrow package also include support
+for CSV and other text-delimited files. The
 <code><a href="../reference/read_delim_arrow.html">read_csv_arrow()</a></code>, <code><a href="../reference/read_delim_arrow.html">read_tsv_arrow()</a></code>, and
 <code><a href="../reference/read_delim_arrow.html">read_delim_arrow()</a></code> functions all use the Arrow C++ CSV
 reader to read data files, where the Arrow C++ options have been mapped
 to arguments in a way that mirrors the conventions used in
 <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_delim()</a></code>, with a <code>col_select</code>
 argument inspired by <code><a href="https://vroom.r-lib.org/reference/vroom.html" class="external-link">vroom::vroom()</a></code>.</p>
-<p>Although <code><a href="../reference/read_delim_arrow.html">read_csv_arrow()</a></code> currently has fewer parsing
-options for dealing with every CSV format variation in the wild than
-other CSV readers available in R, for those files that it can read, it
-is often significantly faster than other R CSV readers, such as
-<code>base::read.csv</code>, <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv</a></code>, and
-<code><a href="https://Rdatatable.gitlab.io/data.table/reference/fread.html" class="external-link">data.table::fread</a></code>.</p>
-<p>A simple example of writing and reading a CSV file with
-<code>arrow</code> is shown below:</p>
+<p>A simple example of writing and reading a CSV file with arrow is
+shown below:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">file_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="../reference/write_csv_arrow.html">write_csv_arrow</a></span><span class="op">(</span><span class="va">mtcars</span>, <span class="va">file_path</span><span class="op">)</span>
@@ -352,14 +346,21 @@ is often significantly faster than other R CSV readers, such as
 <span class="co">## <span style="color: #BCBCBC;"> 9</span>  141.  3.92</span>
 <span class="co">## <span style="color: #BCBCBC;">10</span>  168.  3.92</span>
 <span class="co">## <span style="color: #949494;"># … with 22 more rows</span></span></code></pre>
+<p>In addition to the options provided by the readr-style arguments
+(<code>delim</code>, <code>quote</code>, <code>escape_doubple</code>,
+<code>escape_backslash</code>, etc), you can use the <code>schema</code>
+argument to specify column types: see <code><a href="../reference/Schema.html">schema()</a></code> help for
+details. There is also the option of using <code>parse_options</code>,
+<code>convert_options</code>, and <code>read_options</code> to exercise
+fine-grained control over the arrow csv reader: see
+<code><a href="../reference/CsvReadOptions.html">help("CsvReadOptions", package = "arrow")</a></code> for details.</p>
 </div>
 <div class="section level2">
 <h2 id="json-format">JSON format<a class="anchor" aria-label="anchor" href="#json-format"></a>
 </h2>
-<p>The <code>arrow</code> package supports reading (but not writing) of
-tabular data from line-delimited JSON, using the
-<code><a href="../reference/read_json_arrow.html">read_json_arrow()</a></code> function. A minimal example is shown
-below:</p>
+<p>The arrow package supports reading (but not writing) of tabular data
+from line-delimited JSON, using the <code><a href="../reference/read_json_arrow.html">read_json_arrow()</a></code>
+function. A minimal example is shown below:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">file_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="st">'
@@ -382,6 +383,9 @@ below:</p>
 <li>To learn more about cloud storage, see the <a href="./fs.html">cloud
 storage article</a>.</li>
 <li>To learn more about multi-file datasets, see the <a href="./dataset.html">datasets article</a>.</li>
+<li>The Apache Arrow R cookbook has chapters on <a href="https://arrow.apache.org/cookbook/r/reading-and-writing-data---single-files.html" class="external-link">reading
+and writing single files</a> into memory and working with <a href="https://arrow.apache.org/cookbook/r/reading-and-writing-data---multiple-files.html" class="external-link">multi-file
+datasets</a> stored on-disk.</li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

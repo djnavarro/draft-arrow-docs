@@ -20,10 +20,9 @@ articles:
   install: install.html
   install_nightly: install_nightly.html
   metadata: metadata.html
-  package_conventions: package_conventions.html
   python: python.html
   read_write: read_write.html
-last_built: 2022-10-28T01:45Z
+last_built: 2022-11-23T20:59Z
 urls:
   reference: https://arrow.apache.org/docs/r/reference
   article: https://arrow.apache.org/docs/r/articles

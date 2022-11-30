@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Learn how to use `arrow` and `reticulate` to efficiently transfer data  between R and Python without making unnecessary copies
+<meta name="description" content="Learn how to use arrow and reticulate to efficiently transfer data  between R and Python without making unnecessary copies
 ">
 <title>Integrating Arrow, Python, and R • Arrow R Package</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -19,7 +19,7 @@
 <script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><script src="../extra.js"></script><meta property="og:title" content="Integrating Arrow, Python, and R">
-<meta property="og:description" content="Learn how to use `arrow` and `reticulate` to efficiently transfer data  between R and Python without making unnecessary copies
+<meta property="og:description" content="Learn how to use arrow and reticulate to efficiently transfer data  between R and Python without making unnecessary copies
 ">
 <meta property="og:image" content="https://arrow.apache.org/img/arrow-logo_horizontal_black-txt_white-bg.png">
 <meta property="og:image:alt" content="Apache Arrow logo, displaying the triple chevron image adjacent to the text">
@@ -83,7 +83,6 @@
     <a class="dropdown-item" href="../articles/data_objects.html">Data objects</a>
     <a class="dropdown-item" href="../articles/data_types.html">Data types</a>
     <a class="dropdown-item" href="../articles/metadata.html">Metadata</a>
-    <a class="dropdown-item" href="../articles/package_conventions.html">Package conventions</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Installation</h6>
     <a class="dropdown-item" href="../articles/install.html">Installing on Linux</a>
@@ -121,11 +120,11 @@
 
     
     
-<p>The <code>arrow</code> package provides <a href="https://rstudio.github.io/reticulate/" class="external-link">reticulate</a> methods for
+<p>The arrow package provides <a href="https://rstudio.github.io/reticulate/" class="external-link">reticulate</a> methods for
 passing data between R and Python within the same process. This article
 provides a brief overview.</p>
-<p>Code in this article assumes <code>arrow</code> and
-<code>reticulate</code> are both loaded:</p>
+<p>Code in this article assumes arrow and reticulate are both
+loaded:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/apache/arrow/" class="external-link">arrow</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/" class="external-link">reticulate</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
@@ -135,13 +134,12 @@ provides a brief overview.</p>
 <p>One reason you might want to use PyArrow in R is to take advantage of
 functionality that is better supported in Python than in R at the
 current state of development. For example, at one point in time the R
-<code>arrow</code> package didn’t support <code><a href="../reference/concat_arrays.html">concat_arrays()</a></code>
-but PyArrow did, so this would have been a good use case at that time.
-At the time of current writing PyArrow has more comprehensive support
-for <a href="https://arrow.apache.org/docs/format/Flight.html" class="external-link">Arrow
-Flight</a> than the R package – but see <a href="./flight.html">the
-article on Flight support in arrow</a> – so that would be another
-instance in which PyArrow would be of benefit to R users.</p>
+arrow package didn’t support <code><a href="../reference/concat_arrays.html">concat_arrays()</a></code> but PyArrow
+did, so this would have been a good use case at that time. At the time
+of current writing PyArrow has more comprehensive support for <a href="https://arrow.apache.org/docs/format/Flight.html" class="external-link">Arrow Flight</a>
+than the R package – but see <a href="./flight.html">the article on
+Flight support in arrow</a> – so that would be another instance in which
+PyArrow would be of benefit to R users.</p>
 <p>A second reason that R users may want to use PyArrow is to
 efficiently pass data objects between R and Python. With large data
 sets, it can be quite costly – in terms of time and CPU cycles – to
@@ -186,10 +184,9 @@ documentation</a>, which discusses the topic in more detail.</p>
 <div class="section level2">
 <h2 id="importing-pyarrow">Importing PyArrow<a class="anchor" aria-label="anchor" href="#importing-pyarrow"></a>
 </h2>
-<p>Assuming that <code>arrow</code> and <code>reticulate</code> are both
-loaded in R, your first step is to make sure that the correct Python
-environment is being used. To do that with a virtual environment, use a
-command like this:</p>
+<p>Assuming that arrow and reticulate are both loaded in R, your first
+step is to make sure that the correct Python environment is being used.
+To do that with a virtual environment, use a command like this:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/use_python.html" class="external-link">use_virtualenv</a></span><span class="op">(</span><span class="st">"my-pyarrow-env"</span><span class="op">)</span></code></pre></div>
 <p>For a conda environment use the following:</p>
@@ -213,10 +210,10 @@ as shown below:</p>
 <div class="section level2">
 <h2 id="using-pyarrow">Using PyArrow<a class="anchor" aria-label="anchor" href="#using-pyarrow"></a>
 </h2>
-<p>You can use the <code>reticulate</code> function
-<code><a href="https://rstudio.github.io/reticulate/reference/r-py-conversion.html" class="external-link">r_to_py()</a></code> to pass objects from R to Python, and similarly
-you can use <code><a href="https://rstudio.github.io/reticulate/reference/r-py-conversion.html" class="external-link">py_to_r()</a></code> to pull objects from the Python
-session into R. To illustrate this, let’s create two objects in R:
+<p>You can use the reticulate function <code><a href="https://rstudio.github.io/reticulate/reference/r-py-conversion.html" class="external-link">r_to_py()</a></code> to pass
+objects from R to Python, and similarly you can use
+<code><a href="https://rstudio.github.io/reticulate/reference/r-py-conversion.html" class="external-link">py_to_r()</a></code> to pull objects from the Python session into R.
+To illustrate this, let’s create two objects in R:
 <code>df_random</code> is an R data frame containing 100 million rows of
 random data, and <code>tb_random</code> is the same data stored as an
 Arrow Table:</p>

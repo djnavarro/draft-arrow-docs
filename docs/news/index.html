@@ -53,7 +53,6 @@
     <a class="dropdown-item" href="../articles/data_objects.html">Data objects</a>
     <a class="dropdown-item" href="../articles/data_types.html">Data types</a>
     <a class="dropdown-item" href="../articles/metadata.html">Metadata</a>
-    <a class="dropdown-item" href="../articles/package_conventions.html">Package conventions</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Installation</h6>
     <a class="dropdown-item" href="../articles/install.html">Installing on Linux</a>
@@ -124,7 +123,7 @@
 <h3 id="arrow-dplyr-queries-9-0-0">Arrow dplyr queries<a class="anchor" aria-label="anchor" href="#arrow-dplyr-queries-9-0-0"></a></h3>
 <ul><li>New dplyr verbs:
 <ul><li>
-<code><a href="https://generics.r-lib.org/reference/setops.html" class="external-link">dplyr::union</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/setops.html" class="external-link">dplyr::union_all</a></code> (<a href="https://issues.apache.org/jira/browse/ARROW-15622" class="external-link">ARROW-15622</a>)</li>
+<code><a href="https://dplyr.tidyverse.org/reference/setops.html" class="external-link">dplyr::union</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/setops.html" class="external-link">dplyr::union_all</a></code> (<a href="https://issues.apache.org/jira/browse/ARROW-15622" class="external-link">ARROW-15622</a>)</li>
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/glimpse.html" class="external-link">dplyr::glimpse</a></code> (<a href="https://issues.apache.org/jira/browse/ARROW-16776" class="external-link">ARROW-16776</a>)</li>
 <li>
@@ -437,7 +436,7 @@
 <h3 id="more-dplyr-5-0-0">More dplyr<a class="anchor" aria-label="anchor" href="#more-dplyr-5-0-0"></a></h3>
 <ul><li>
 <p>There are now more than 250 compute functions available for use in <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">dplyr::filter()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code>, etc. Additions in this release include:</p>
-<ul><li>String operations: <code><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit()</a></code> and <code><a href="https://stringr.tidyverse.org/reference/str_split.html" class="external-link">str_split()</a></code>; <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strptime()</a></code>; <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste()</a></code>, <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0()</a></code>, and <code><a href="https://stringr.tidyverse.org/reference/str_c.html" class="external-link">str_c()</a></code>; <code><a href="https://rdrr.io/r/base/substr.html" class="external-link">substr()</a></code> and <code><a href="https://stringr.tidyverse.org/reference/str_sub.html" class="external-link">str_sub()</a></code>; <code>str_like()</code>; <code><a href="https://stringr.tidyverse.org/reference/str_pad.html" class="external-link">str_pad()</a></code>; <code>stri_reverse()</code>
+<ul><li>String operations: <code><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit()</a></code> and <code><a href="https://stringr.tidyverse.org/reference/str_split.html" class="external-link">str_split()</a></code>; <code><a href="https://rdrr.io/r/base/strptime.html" class="external-link">strptime()</a></code>; <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste()</a></code>, <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0()</a></code>, and <code><a href="https://stringr.tidyverse.org/reference/str_c.html" class="external-link">str_c()</a></code>; <code><a href="https://rdrr.io/r/base/substr.html" class="external-link">substr()</a></code> and <code><a href="https://stringr.tidyverse.org/reference/str_sub.html" class="external-link">str_sub()</a></code>; <code><a href="https://stringr.tidyverse.org/reference/str_like.html" class="external-link">str_like()</a></code>; <code><a href="https://stringr.tidyverse.org/reference/str_pad.html" class="external-link">str_pad()</a></code>; <code>stri_reverse()</code>
 </li>
 <li>Date/time operations: <code>lubridate</code> methods such as <code>year()</code>, <code>month()</code>, <code>wday()</code>, and so on</li>
 <li>Math: logarithms (<code><a href="https://rdrr.io/r/base/Log.html" class="external-link">log()</a></code> et al.); trigonometry (<code><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin()</a></code>, <code><a href="https://rdrr.io/r/base/Trig.html" class="external-link">cos()</a></code>, et al.); <code><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs()</a></code>; <code><a href="https://rdrr.io/r/base/sign.html" class="external-link">sign()</a></code>; <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">pmin()</a></code> and <code><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">pmax()</a></code>; <code><a href="https://rdrr.io/r/base/Round.html" class="external-link">ceiling()</a></code>, <code><a href="https://rdrr.io/r/base/Round.html" class="external-link">floor()</a></code>, and <code><a href="https://rdrr.io/r/base/Round.html" class="external-link">trunc()</a></code>
@@ -448,7 +447,7 @@
 </li>
 </ul></li>
 <li><p>The print method for <code>arrow_dplyr_query</code> now includes the expression and the resulting type of columns derived by <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code>.</p></li>
-<li><p><code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">transmute()</a></code> now errors if passed arguments <code>.keep</code>, <code>.before</code>, or <code>.after</code>, for consistency with the behavior of <code>dplyr</code> on <code>data.frame</code>s.</p></li>
+<li><p><code><a href="https://dplyr.tidyverse.org/reference/transmute.html" class="external-link">transmute()</a></code> now errors if passed arguments <code>.keep</code>, <code>.before</code>, or <code>.after</code>, for consistency with the behavior of <code>dplyr</code> on <code>data.frame</code>s.</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="csv-writing-5-0-0">CSV writing<a class="anchor" aria-label="anchor" href="#csv-writing-5-0-0"></a></h3>
@@ -499,7 +498,7 @@
 <ul><li>
 <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate()</a></code> is now supported in Arrow for many applications. For queries on <code>Table</code> and <code>RecordBatch</code> that are not yet supported in Arrow, the implementation falls back to pulling data into an in-memory R <code>data.frame</code> first, as in the previous release. For queries on <code>Dataset</code> (which can be larger than memory), it raises an error if the function is not implemented. The main <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> features that cannot yet be called on Arrow objects are (1) <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> after <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code> (which is typically used in combination with aggregation) and (2) queries that use <code><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">dplyr::across()</a></code>.</li>
 <li>
-<code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::transmute()</a></code> (which calls <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code>)</li>
+<code><a href="https://dplyr.tidyverse.org/reference/transmute.html" class="external-link">dplyr::transmute()</a></code> (which calls <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code>)</li>
 <li>
 <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">dplyr::group_by()</a></code> now preserves the <code>.drop</code> argument and supports on-the-fly definition of columns</li>
 <li>

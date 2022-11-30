@@ -83,7 +83,6 @@
     <a class="dropdown-item" href="../articles/data_objects.html">Data objects</a>
     <a class="dropdown-item" href="../articles/data_types.html">Data types</a>
     <a class="dropdown-item" href="../articles/metadata.html">Metadata</a>
-    <a class="dropdown-item" href="../articles/package_conventions.html">Package conventions</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Installation</h6>
     <a class="dropdown-item" href="../articles/install.html">Installing on Linux</a>
@@ -127,8 +126,8 @@ Storage</a> (GCS) is a very common task. Because of this, the Arrow C++
 library provides a toolkit aimed to make it as simple to work with cloud
 storage as it is to work with the local filesystem.</p>
 <p>To make this work, the Arrow C++ library contains a general-purpose
-interface for file systems, and the <code>arrow</code> package exposes
-this interface to R users. For instance, if you want to you can create a
+interface for file systems, and the arrow package exposes this interface
+to R users. For instance, if you want to you can create a
 <code>LocalFileSystem</code> object that allows you to interact with the
 local file system in the usual ways: copying, moving, and deleting
 files, obtaining information about files and folders, and so on (see
@@ -144,11 +143,11 @@ data using the Arrow toolkit.</p>
 <div class="section level2">
 <h2 id="s3-and-gcs-support-on-linux">S3 and GCS support on Linux<a class="anchor" aria-label="anchor" href="#s3-and-gcs-support-on-linux"></a>
 </h2>
-<p>Before you start, make sure that your <code>arrow</code> install has
-support for S3 and/or GCS enabled. For most users this will be true by
-default, because the Windows and MacOS binary packages hosted on CRAN
-include S3 and GCS support. You can check whether support is enabled via
-helper functions:</p>
+<p>Before you start, make sure that your arrow install has support for
+S3 and/or GCS enabled. For most users this will be true by default,
+because the Windows and MacOS binary packages hosted on CRAN include S3
+and GCS support. You can check whether support is enabled via helper
+functions:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/arrow_info.html">arrow_with_s3</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="../reference/arrow_info.html">arrow_with_gcs</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -156,10 +155,10 @@ helper functions:</p>
 enabled.</p>
 <p>In some cases you may find that your system does not have support
 enabled. The most common case for this occurs on Linux when installing
-<code>arrow</code> from source. In this situation S3 and GCS support is
-not always enabled by default, and there are additional system
-requirements involved. See the <a href="./install.html">installation
-article</a> for details on how to resolve this.</p>
+arrow from source. In this situation S3 and GCS support is not always
+enabled by default, and there are additional system requirements
+involved. See the <a href="./install.html">installation article</a> for
+details on how to resolve this.</p>
 </div>
 <div class="section level2">
 <h2 id="connecting-to-cloud-storage">Connecting to cloud storage<a class="anchor" aria-label="anchor" href="#connecting-to-cloud-storage"></a>
@@ -178,15 +177,13 @@ file readers and writers (<code><a href="../reference/read_parquet.html">read_pa
 <code><a href="../reference/write_feather.html">write_feather()</a></code>, et al.).</p>
 <p>Often the reason users work with cloud storage in real world analysis
 is to access large data sets. An example of this is discussed in the <a href="./dataset.html">datasets article</a>, but new users may prefer to
-work with a much smaller data set while learning how the
-<code>arrow</code> cloud storage interface works. To that end, the
-examples in this article rely on a multi-file Parquet dataset that
-stores a copy of the <code>diamonds</code> data made available through
-the <a href="https://ggplot2.tidyverse.org/" class="external-link"><code>ggplot2</code></a>
-package, documented in
-<code><a href="https://ggplot2.tidyverse.org/reference/diamonds.html" class="external-link">help("diamonds", package = "ggplot2")</a></code>. The cloud storage
-version of this data set consists of 5 Parquet files totaling less than
-1MB in size.</p>
+work with a much smaller data set while learning how the arrow cloud
+storage interface works. To that end, the examples in this article rely
+on a multi-file Parquet dataset that stores a copy of the
+<code>diamonds</code> data made available through the <a href="https://ggplot2.tidyverse.org/" class="external-link"><code>ggplot2</code></a> package,
+documented in <code><a href="https://ggplot2.tidyverse.org/reference/diamonds.html" class="external-link">help("diamonds", package = "ggplot2")</a></code>. The
+cloud storage version of this data set consists of 5 Parquet files
+totaling less than 1MB in size.</p>
 <p>The diamonds data set is hosted on both S3 and GCS, in a bucket named
 <code>voltrondata-labs-datasets</code>. To create an S3FileSystem object
 that refers to that bucket, use the following command:</p>
@@ -271,14 +268,14 @@ june2019 <- SubTreeFileSystem$create("s3://voltrondata-labs-datasets/nyc-taxi/ye
 <h2 id="connecting-directly-with-a-uri">Connecting directly with a URI<a class="anchor" aria-label="anchor" href="#connecting-directly-with-a-uri"></a>
 </h2>
 <p>In most use cases, the easiest and most natural way to connect to
-cloud storage in <code>arrow</code> is to use the FileSystem objects
-returned by <code><a href="../reference/s3_bucket.html">s3_bucket()</a></code> and <code><a href="../reference/gs_bucket.html">gs_bucket()</a></code>,
-especially when multiple file operations are required. However, in some
-cases you may want to download a file directly by specifying the URI.
-This is permitted by <code>arrow</code>, and functions like
-<code><a href="../reference/read_parquet.html">read_parquet()</a></code>, <code><a href="../reference/write_feather.html">write_feather()</a></code>,
-<code><a href="../reference/open_dataset.html">open_dataset()</a></code> etc will all accept URIs to cloud resources
-hosted on S3 or GCS. The format of an S3 URI is as follows:</p>
+cloud storage in arrow is to use the FileSystem objects returned by
+<code><a href="../reference/s3_bucket.html">s3_bucket()</a></code> and <code><a href="../reference/gs_bucket.html">gs_bucket()</a></code>, especially when
+multiple file operations are required. However, in some cases you may
+want to download a file directly by specifying the URI. This is
+permitted by arrow, and functions like <code><a href="../reference/read_parquet.html">read_parquet()</a></code>,
+<code><a href="../reference/write_feather.html">write_feather()</a></code>, <code><a href="../reference/open_dataset.html">open_dataset()</a></code> etc will all
+accept URIs to cloud resources hosted on S3 or GCS. The format of an S3
+URI is as follows:</p>
 <pre><code>s3://[access_key:secret_key@]bucket/path[?region=]</code></pre>
 <p>For GCS, the URI format looks like this:</p>
 <pre><code>gs://[access_key:secret_key@]bucket/path
@@ -398,8 +395,8 @@ port 1316 can be used like this:</p>
 <p>The <code>S3FileSystem</code> machinery enables you to work with any
 file system that provides an S3-compatible interface. For example, <a href="https://min.io/" class="external-link">MinIO</a> is and object-storage server that
 emulates the S3 API. If you were to run <code>minio server</code>
-locally with its default settings, you could connect to it with
-<code>arrow</code> using <code>S3FileSystem</code> like this:</p>
+locally with its default settings, you could connect to it with arrow
+using <code>S3FileSystem</code> like this:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">minio</span> <span class="op">&lt;-</span> <span class="va">S3FileSystem</span><span class="op">$</span><span class="fu">create</span><span class="op">(</span>
   access_key <span class="op">=</span> <span class="st">"minioadmin"</span>,

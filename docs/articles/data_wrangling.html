@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Learn how to use the `dplyr` backend supplied by `arrow` 
+<meta name="description" content="Learn how to use the dplyr backend supplied by arrow 
 ">
 <title>Data analysis with dplyr syntax • Arrow R Package</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -19,7 +19,7 @@
 <script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><script src="../extra.js"></script><meta property="og:title" content="Data analysis with dplyr syntax">
-<meta property="og:description" content="Learn how to use the `dplyr` backend supplied by `arrow` 
+<meta property="og:description" content="Learn how to use the dplyr backend supplied by arrow 
 ">
 <meta property="og:image" content="https://arrow.apache.org/img/arrow-logo_horizontal_black-txt_white-bg.png">
 <meta property="og:image:alt" content="Apache Arrow logo, displaying the triple chevron image adjacent to the text">
@@ -83,7 +83,6 @@
     <a class="dropdown-item" href="../articles/data_objects.html">Data objects</a>
     <a class="dropdown-item" href="../articles/data_types.html">Data types</a>
     <a class="dropdown-item" href="../articles/metadata.html">Metadata</a>
-    <a class="dropdown-item" href="../articles/package_conventions.html">Package conventions</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Installation</h6>
     <a class="dropdown-item" href="../articles/install.html">Installing on Linux</a>
@@ -121,16 +120,15 @@
 
     
     
-<p>The <code>arrow</code> package provides a <code>dplyr</code> back end
-that allows users to manipulate tabular Arrow data (<code>Table</code>
-and <code>Dataset</code> objects) using familiar <code>dplyr</code>
-syntax. To use this functionality, make sure that the <code>arrow</code>
-and <code>dplyr</code> packages are both loaded. In this article we will
-take the <code>starwars</code> data set included in <code>dplyr</code>,
-convert it to an Arrow Table, and then analyze this data. Note that,
-although these examples all use an in-memory <code>Table</code> object,
-the same functionality works for an on-disk <code>Dataset</code> object
-with only minor differences in behavior (documented later in the
+<p>The arrow package provides functionality allowing users to manipulate
+tabular Arrow data (<code>Table</code> and <code>Dataset</code> objects)
+with familiar <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> syntax. To enable this functionality,
+ensure that the arrow and dplyr packages are both loaded. In this
+article we will take the <code>starwars</code> data set included in
+dplyr, convert it to an Arrow Table, and then analyze this data. Note
+that, although these examples all use an in-memory <code>Table</code>
+object, the same functionality works for an on-disk <code>Dataset</code>
+object with only minor differences in behavior (documented later in the
 article).</p>
 <p>To get started let’s load the packages and create the data:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -141,11 +139,11 @@ article).</p>
 <div class="section level2">
 <h2 id="one-table-dplyr-verbs">One-table dplyr verbs<a class="anchor" aria-label="anchor" href="#one-table-dplyr-verbs"></a>
 </h2>
-<p>The <code>arrow</code> package provides support for the
-<code>dplyr</code> one-table verbs, allowing users to construct data
-analysis pipelines in a familiar way. The example below shows the use of
-<code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code>,
-<code><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select()</a></code>:</p>
+<p>The arrow package provides support for the dplyr one-table verbs,
+allowing users to construct data analysis pipelines in a familiar way.
+The example below shows the use of <code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter()</a></code>,
+<code><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code>, <code><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange()</a></code> and
+<code><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select()</a></code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="va">sw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">homeworld</span> <span class="op">==</span> <span class="st">"Tatooine"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -153,14 +151,14 @@ analysis pipelines in a familiar way. The example below shows the use of
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>height_in <span class="op">=</span> <span class="va">height_cm</span> <span class="op">/</span> <span class="fl">2.54</span>, mass_lbs <span class="op">=</span> <span class="va">mass_kg</span> <span class="op">*</span> <span class="fl">2.2046</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">birth_year</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">height_in</span>, <span class="va">mass_lbs</span><span class="op">)</span></code></pre></div>
-<p>It is important to note that <code>arrow</code> users lazy evaluation
-to delay computation until the result is explicitly requested. This
-speeds up processing by enabling the Arrow C++ library to perform
-multiple computations in one operation. As a consequence of this design
-choice, we have not yet performed computations on the <code>sw</code>
-data have been performed. The <code>result</code> variable is an object
-with class <code>arrow_dplyr_query</code> that represents all the
-computations to be performed:</p>
+<p>It is important to note that arrow uses lazy evaluation to delay
+computation until the result is explicitly requested. This speeds up
+processing by enabling the Arrow C++ library to perform multiple
+computations in one operation. As a consequence of this design choice,
+we have not yet performed computations on the <code>sw</code> data. The
+<code>result</code> variable is an object with class
+<code>arrow_dplyr_query</code> that represents all the computations to
+be performed:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span></code></pre></div>
 <pre><code><span class="co">## Table (query)</span>
@@ -175,7 +173,7 @@ computations to be performed:</p>
 <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">compute()</a></code> or <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code>. The difference between
 the two determines what kind of object will be returned. Calling
 <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">compute()</a></code> returns an Arrow Table, suitable for passing to
-other <code>arrow</code> or <code>dplyr</code> functions:</p>
+other arrow or dplyr functions:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">compute</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Table</span>
@@ -201,11 +199,10 @@ visualization:</p>
 <span class="co">## <span style="color: #BCBCBC;"> 8</span> Biggs Darklighter       72.0    185. </span>
 <span class="co">## <span style="color: #BCBCBC;"> 9</span> Luke Skywalker          67.7    170. </span>
 <span class="co">## <span style="color: #BCBCBC;">10</span> R5-D4                   38.2     70.5</span></code></pre>
-<p>The <code>arrow</code> package has broad support for single-table
-<code>dplyr</code> verbs, including those that compute aggregates. For
-example, it supports <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code> and
-<code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code>, as well as commonly-used convenience functions
-such as <code><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count()</a></code>:</p>
+<p>The arrow package has broad support for single-table dplyr verbs,
+including those that compute aggregates. For example, it supports
+<code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize()</a></code>, as well as
+commonly-used convenience functions such as <code><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count()</a></code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -226,7 +223,7 @@ such as <code><a href="https://dplyr.tidyverse.org/reference/count.html" class="
 <span class="co">## <span style="color: #BCBCBC;">10</span> Sullustan             160 </span>
 <span class="co">## <span style="color: #949494;"># … with 28 more rows</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">sw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">gender</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 3 × 2</span></span>
@@ -235,7 +232,7 @@ such as <code><a href="https://dplyr.tidyverse.org/reference/count.html" class="
 <span class="co">## <span style="color: #BCBCBC;">1</span> masculine    66</span>
 <span class="co">## <span style="color: #BCBCBC;">2</span> feminine     17</span>
 <span class="co">## <span style="color: #BCBCBC;">3</span> <span style="color: #BB0000;">NA</span>            4</span></code></pre>
-<p>Note, however, that window functions such as <code><a href="https://dplyr.tidyverse.org/reference/ranking.html" class="external-link">ntile()</a></code> are
+<p>Note, however, that window functions such as <code><a href="https://dplyr.tidyverse.org/reference/ntile.html" class="external-link">ntile()</a></code> are
 not yet supported.</p>
 </div>
 <div class="section level2">
@@ -264,18 +261,19 @@ This is illustrated below:</p>
 <div class="section level2">
 <h2 id="expressions-within-dplyr-verbs">Expressions within dplyr verbs<a class="anchor" aria-label="anchor" href="#expressions-within-dplyr-verbs"></a>
 </h2>
-<p>Inside <code>dplyr</code> verbs, Arrow offers support for many
-functions and operators, with common functions mapped to their base R
-and tidyverse equivalents. The <a href="https://arrow.apache.org/docs/r/news/index.html">changelog</a>
-lists many of them. If there are additional functions you would like to
-see implemented, please file an issue as described in the <a href="https://arrow.apache.org/docs/r/#getting-help">Getting help</a>
+<p>Inside dplyr verbs, Arrow offers support for many functions and
+operators, with common functions mapped to their base R and tidyverse
+equivalents: you can find a <a href="../reference/acero.html">list of
+supported functions within dplyr queries</a> in the function
+documentation. If there are additional functions you would like to see
+implemented, please file an issue as described in the <a href="https://arrow.apache.org/docs/r/#getting-help">Getting help</a>
 guidelines.</p>
 </div>
 <div class="section level2">
 <h2 id="registering-custom-bindings">Registering custom bindings<a class="anchor" aria-label="anchor" href="#registering-custom-bindings"></a>
 </h2>
-<p>The <code>arrow</code> package makes it possible for users to supply
-bindings for custom functions in some situations using
+<p>The arrow package makes it possible for users to supply bindings for
+custom functions in some situations using
 <code><a href="../reference/register_scalar_function.html">register_scalar_function()</a></code>. To operate correctly, the
 to-be-registered function must have <code>context</code> as its first
 argument, as required by the query engine. For example, suppose we
@@ -285,13 +283,13 @@ The function could be written as follows:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">to_snake_name</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">context</span>, <span class="va">string</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">replace</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>`'` <span class="op">=</span> <span class="st">""</span>, `"` <span class="op">=</span> <span class="st">""</span>, `-` <span class="op">=</span> <span class="st">""</span>, `\\.` <span class="op">=</span> <span class="st">"_"</span>, ` ` <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span>
-  <span class="va">string</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="va">string</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
     <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">str_replace_all</a></span><span class="op">(</span><span class="va">replace</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-    <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html" class="external-link">str_to_lower</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+    <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html" class="external-link">str_to_lower</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
     <span class="fu">stringi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_trans_general.html" class="external-link">stri_trans_general</a></span><span class="op">(</span>id <span class="op">=</span> <span class="st">"Latin-ASCII"</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
-<p>To call this within an <code>arrow</code>/<code>dplyr</code>
-pipeline, it needs to be registered:</p>
+<p>To call this within an arrow/dplyr pipeline, it needs to be
+registered:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/register_scalar_function.html">register_scalar_function</a></span><span class="op">(</span>
   name <span class="op">=</span> <span class="st">"to_snake_name"</span>,
@@ -301,17 +299,16 @@ pipeline, it needs to be registered:</p>
   auto_convert <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
 <p>In this expression, the <code>name</code> argument specifies the name
-by which it will be recognized in the context of the
-<code>arrow</code>/<code>dplyr</code> pipeline and <code>fun</code> is
-the function itself. The <code>in_type</code> and <code>out_type</code>
-arguments are used to specify the expected data type for the input and
-output, and <code>auto_convert</code> specifies whether
-<code>arrow</code> should automatically convert any R inputs to their
-Arrow equivalents.</p>
+by which it will be recognized in the context of the arrow/dplyr
+pipeline and <code>fun</code> is the function itself. The
+<code>in_type</code> and <code>out_type</code> arguments are used to
+specify the expected data type for the input and output, and
+<code>auto_convert</code> specifies whether arrow should automatically
+convert any R inputs to their Arrow equivalents.</p>
 <p>Once registered, the following works:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">transmute</a></span><span class="op">(</span><span class="va">name</span>, snake_name <span class="op">=</span> <span class="fu">to_snake_name</span><span class="op">(</span><span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+<code class="sourceCode R"><span class="va">sw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">name</span>, snake_name <span class="op">=</span> <span class="fu">to_snake_name</span><span class="op">(</span><span class="va">name</span><span class="op">)</span>, .keep <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 87 × 2</span></span>
 <span class="co">##    name               snake_name        </span>
@@ -333,19 +330,18 @@ Arrow equivalents.</p>
 <div class="section level2">
 <h2 id="handling-unsupported-expressions">Handling unsupported expressions<a class="anchor" aria-label="anchor" href="#handling-unsupported-expressions"></a>
 </h2>
-<p>For <code>dplyr</code> queries on Table objects, which are held in
-memory and should usually be representable as data frames, if the
-<code>arrow</code> package detects an unimplemented function within a
-<code>dplyr</code> verb, it automatically calls <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code>
-to return the data as an R data frame before processing that
-<code>dplyr</code> verb. As an example, neither <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> nor
-<code><a href="https://rdrr.io/r/stats/residuals.html" class="external-link">residuals()</a></code> are implemented, so if we write code that
-computes the residuals for a linear regression model, this automatic
-collection takes place:</p>
+<p>For dplyr queries on Table objects, which are held in memory and
+should usually be representable as data frames, if the arrow package
+detects an unimplemented function within a dplyr verb, it automatically
+calls <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> to return the data as an R data frame
+before processing that dplyr verb. As an example, neither
+<code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> nor <code><a href="https://rdrr.io/r/stats/residuals.html" class="external-link">residuals()</a></code> are implemented, so if we
+write code that computes the residuals for a linear regression model,
+this automatic collection takes place:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">mass</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">transmute</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">height</span>, <span class="va">mass</span>, res <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html" class="external-link">residuals</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mass</span> <span class="op">~</span> <span class="va">height</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">sw</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">mass</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html" class="external-link">transmute</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">height</span>, <span class="va">mass</span>, res <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html" class="external-link">residuals</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mass</span> <span class="op">~</span> <span class="va">height</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Warning: Expression residuals(lm(mass ~ height)) not supported in Arrow; pulling</span>
 <span class="co">## data into R</span></code></pre>
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 59 × 4</span></span>
@@ -363,11 +359,11 @@ collection takes place:</p>
 <span class="co">## <span style="color: #BCBCBC;">10</span> Obi-Wan Kenobi        182    77 -<span style="color: #BB0000;">25.4</span></span>
 <span class="co">## <span style="color: #949494;"># … with 49 more rows</span></span></code></pre>
 <p>For queries on <code>Dataset</code> objects – which can be larger
-than memory – <code>arrow</code> is more conservative and always raises
-an error if it detects an unsupported expression. To illustrate this
-behavior, we can write the <code>starwars</code> data to disk and then
-open it as a Dataset. When we use the same pipeline on the Dataset, we
-obtain an error:</p>
+than memory – arrow is more conservative and always raises an error if
+it detects an unsupported expression. To illustrate this behavior, we
+can write the <code>starwars</code> data to disk and then open it as a
+Dataset. When we use the same pipeline on the Dataset, we obtain an
+error:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># write and open starwars dataset</span>
 <span class="va">dataset_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span>
@@ -375,18 +371,18 @@ obtain an error:</p>
 <span class="va">sw2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/open_dataset.html">open_dataset</a></span><span class="op">(</span><span class="va">dataset_path</span><span class="op">)</span>
 
 <span class="co"># dplyr pipeline with unsupported expressions</span>
-<span class="va">sw2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">mass</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">transmute</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">height</span>, <span class="va">mass</span>, res <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html" class="external-link">residuals</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mass</span> <span class="op">~</span> <span class="va">height</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="va">sw2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">mass</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html" class="external-link">transmute</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">height</span>, <span class="va">mass</span>, res <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html" class="external-link">residuals</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mass</span> <span class="op">~</span> <span class="va">height</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Error: Expression residuals(lm(mass ~ height)) not supported in Arrow</span>
 <span class="co">## Call collect() first to pull data into R.</span></code></pre>
 <p>Calling <code><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect()</a></code> in the middle of the pipeline fixes
 the issue:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">sw2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">mass</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">sw2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">mass</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/compute.html" class="external-link">collect</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">transmute</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">height</span>, <span class="va">mass</span>, res <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html" class="external-link">residuals</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mass</span> <span class="op">~</span> <span class="va">height</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html" class="external-link">transmute</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">height</span>, <span class="va">mass</span>, res <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/residuals.html" class="external-link">residuals</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mass</span> <span class="op">~</span> <span class="va">height</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 59 × 4</span></span>
 <span class="co">##    name               height  mass   res</span>
 <span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -409,9 +405,9 @@ the issue:</p>
 <li>To learn more about multi-file datasets, see the <a href="./dataset.html">dataset article</a>.</li>
 <li>To learn more about user-registered functions, see
 <code><a href="../reference/register_scalar_function.html">help("register_scalar_function", package = "arrow")</a></code>.</li>
-<li>To learn more about writing dplyr bindings as an <code>arrow</code>
-developer, see the <a href="./developers/writing_bindings.html">article
-on writing bindings</a>.</li>
+<li>To learn more about writing dplyr bindings as an arrow developer,
+see the <a href="./developers/writing_bindings.html">article on writing
+bindings</a>.</li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

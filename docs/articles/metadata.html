@@ -83,7 +83,6 @@
     <a class="dropdown-item" href="../articles/data_objects.html">Data objects</a>
     <a class="dropdown-item" href="../articles/data_types.html">Data types</a>
     <a class="dropdown-item" href="../articles/metadata.html">Metadata</a>
-    <a class="dropdown-item" href="../articles/package_conventions.html">Package conventions</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Installation</h6>
     <a class="dropdown-item" href="../articles/install.html">Installing on Linux</a>
@@ -122,13 +121,12 @@
     
     
 <p>This article describes the various data and metadata object types
-supplied by <code>arrow</code>, and documents how these objects are
-structured.</p>
+supplied by arrow, and documents how these objects are structured.</p>
 <div class="section level2">
 <h2 id="arrow-metadata-classes">Arrow metadata classes<a class="anchor" aria-label="anchor" href="#arrow-metadata-classes"></a>
 </h2>
-<p>The <code>arrow</code> package defines the following classes for
-representing metadata:</p>
+<p>The arrow package defines the following classes for representing
+metadata:</p>
 <ul>
 <li>A <code>Schema</code> is a list of <code>Field</code> objects used
 to describe the structure of a tabular data object; where</li>
@@ -165,7 +163,7 @@ define fields:</p>
 <span class="co">## x: int32</span>
 <span class="co">## y: string</span></code></pre>
 <p>Sometimes it is important to specify the schema manually,
-particularly if you want fine grained control over the Arrow data
+particularly if you want fine-grained control over the Arrow data
 types:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/Table.html">arrow_table</a></span><span class="op">(</span><span class="va">df</span>, schema <span class="op">=</span> <span class="fu"><a href="../reference/Schema.html">schema</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="../reference/data-type.html">int64</a></span><span class="op">(</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="../reference/data-type.html">utf8</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
@@ -191,7 +189,7 @@ types:</p>
 convert a <code>data.frame</code> to an Arrow Table or RecordBatch, the
 package stores any <code><a href="https://rdrr.io/r/base/attributes.html" class="external-link">attributes()</a></code> attached to the columns of
 the <code>data.frame</code> in the Arrow object Schema. Attributes added
-to objects in this fasnion are stored under the <code>r</code> key, as
+to objects in this fashion are stored under the <code>r</code> key, as
 shown below:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># data frame with custom metadata</span>
@@ -228,9 +226,9 @@ other key you wish, using a command like this:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tb</span><span class="op">$</span><span class="va">metadata</span><span class="op">$</span><span class="va">new_key</span> <span class="op">&lt;-</span> <span class="st">"new value"</span></code></pre></div>
 <p>Metadata attached to a Schema is preserved when writing the Table to
-Feather or Parquet. When reading those files into R, or when calling
-<code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> on a Table or RecordBatch, the column
-attributes are restored to the columns of the resulting
+Arrow/Feather or Parquet formats. When reading those files into R, or
+when calling <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> on a Table or RecordBatch, the
+column attributes are restored to the columns of the resulting
 <code>data.frame</code>. This means that custom data types, including
 <code><a href="https://haven.tidyverse.org/reference/labelled.html" class="external-link">haven::labelled</a></code>, <code>vctrs</code> annotations, and
 others, are preserved when doing a round-trip through Arrow.</p>
@@ -247,8 +245,8 @@ metadata keys.</p>
 <h2 id="further-reading">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>
 </h2>
 <ul>
-<li>To learn more about <code>arrow</code> metadata, see the
-documentation for <code><a href="../reference/Schema.html">schema()</a></code>.</li>
+<li>To learn more about arrow metadata, see the documentation for
+<code><a href="../reference/Schema.html">schema()</a></code>.</li>
 <li>To learn more about data types, see the <a href="./data_types.html">data types article</a>.</li>
 </ul>
 </div>

@@ -83,7 +83,6 @@
     <a class="dropdown-item" href="../articles/data_objects.html">Data objects</a>
     <a class="dropdown-item" href="../articles/data_types.html">Data types</a>
     <a class="dropdown-item" href="../articles/metadata.html">Metadata</a>
-    <a class="dropdown-item" href="../articles/package_conventions.html">Package conventions</a>
     <div class="dropdown-divider"></div>
     <h6 class="dropdown-header" data-toc-skip>Installation</h6>
     <a class="dropdown-item" href="../articles/install.html">Installing on Linux</a>
@@ -186,25 +185,25 @@ vector) in the data frame; it is labelled <code>&lt;string&gt;</code> (a
 string type, also referred to as utf8 type) in the Arrow Table</li>
 <li>
 <code>height</code> is labelled <code>&lt;int&gt;</code> (integer
-vector) in the data frame; it is labelled <code>&lt;int32&gt;</code>
-(32-bit signed integer) in the Arrow Table</li>
+vector) in the data frame; it is labelled <code>&lt;int32&gt;</code> (32
+bit signed integer) in the Arrow Table</li>
 <li>
 <code>mass</code> is labelled <code>&lt;dbl&gt;</code> (numeric
 vector) in the data frame; it is labelled <code>&lt;double&gt;</code>
-(64-bit floating point number) in the Arrow Table</li>
+(64 bit floating point number) in the Arrow Table</li>
 </ul>
 <p>Some of these differences are purely cosmetic: integers in R are in
-fact 32-bit signed integers, so the underlying data types in Arrow and R
+fact 32 bit signed integers, so the underlying data types in Arrow and R
 are direct analogs of one another. In other cases the differences are
 purely about the implementation: Arrow and R have different ways to
 store a vector of strings, but at a high level of abstraction the R
 character type and the Arrow string type can be viewed as direct
 analogs. In some cases, however, there are no clear analogs: while Arrow
 has an analog of POSIXct (the timestamp type) it does not have an analog
-of POSIXlt; converselt, while R can represent 32 bit signed integers, it
+of POSIXlt; conversely, while R can represent 32 bit signed integers, it
 does not have an equivalent of a 64 bit unsigned integer.</p>
-<p>When the <code>arrow</code> package converts between R data and Arrow
-data, it will first check to see if a Schema has been provided – see
+<p>When the arrow package converts between R data and Arrow data, it
+will first check to see if a Schema has been provided – see
 <code><a href="../reference/Schema.html">schema()</a></code> for more information – and if none is available it
 will attempt to guess the appropriate type by following the default
 mappings. A complete listing of these mappings is provided at the end of
@@ -239,13 +238,13 @@ as shown below:</p>
 <span class="co">##   ]</span>
 <span class="co">## ]</span></code></pre>
 <p>It is not strictly necessary to set <code>type = boolean()</code> in
-this example because the default behavior in <code>arrow</code> is to
-translate R logical vectors to Arrow booleans and vice versa. However,
-for the sake of clarity we will specify the data types explicitly
-throughout this article. We will likewise use
-<code><a href="../reference/ChunkedArray.html">chunked_array()</a></code> to create Arrow data from R objects and
-<code><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector()</a></code> to create R data from Arrow objects, but
-similar results are obtained if we use other methods.</p>
+this example because the default behavior in arrow is to translate R
+logical vectors to Arrow booleans and vice versa. However, for the sake
+of clarity we will specify the data types explicitly throughout this
+article. We will likewise use <code><a href="../reference/ChunkedArray.html">chunked_array()</a></code> to create
+Arrow data from R objects and <code><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector()</a></code> to create R data
+from Arrow objects, but similar results are obtained if we use other
+methods.</p>
 </div>
 <div class="section level2">
 <h2 id="integer-types">Integer types<a class="anchor" aria-label="anchor" href="#integer-types"></a>
@@ -253,8 +252,8 @@ similar results are obtained if we use other methods.</p>
 <p>Base R natively supports only one type of integer, using 32 bits to
 represent signed numbers between -2147483648 and 2147483647, though R
 can also support 64 bit integers via the <a href="https://cran.r-project.org/package=bit64" class="external-link"><code>bit64</code></a>
-package. Arrow inherits signed and unsigned integer types from C++ in
-8-bit, 16-bit, 32-bit, and 64-bit versions:</p>
+package. Arrow inherits signed and unsigned integer types from C++ in 8
+bit, 16 bit, 32 bit, and 64 bit versions:</p>
 <table class="table">
 <colgroup>
 <col width="20%">
@@ -319,9 +318,9 @@ package. Arrow inherits signed and unsigned integer types from C++ in
 </tr>
 </tbody>
 </table>
-<p>By default, <code>arrow</code> translates R integers to the int32
-type in Arrow, but you can override this by explicitly specifying
-another integer type:</p>
+<p>By default, arrow translates R integers to the int32 type in Arrow,
+but you can override this by explicitly specifying another integer
+type:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ChunkedArray.html">chunked_array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10L</span>, <span class="fl">3L</span>, <span class="fl">200L</span><span class="op">)</span>, type <span class="op">=</span> <span class="fu"><a href="../reference/data-type.html">int32</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="co"># default</span></code></pre></div>
 <pre><code><span class="co">## ChunkedArray</span>
@@ -345,7 +344,7 @@ another integer type:</p>
 <span class="co">##   ]</span>
 <span class="co">## ]</span></code></pre>
 <p>If the value in R does not fall within the permissible range for the
-corresponding Arrow type, <code>arrow</code> throws an error:</p>
+corresponding Arrow type, arrow throws an error:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/ChunkedArray.html">chunked_array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10L</span>, <span class="fl">3L</span>, <span class="fl">200L</span><span class="op">)</span>, type <span class="op">=</span> <span class="fu"><a href="../reference/data-type.html">int8</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Error: Invalid: value outside of range</span></code></pre>
@@ -365,9 +364,9 @@ vector in R regardless of the value</li>
 <div class="section level2">
 <h2 id="floating-point-numeric-types">Floating point numeric types<a class="anchor" aria-label="anchor" href="#floating-point-numeric-types"></a>
 </h2>
-<p>R has one double-precision (64-bit) numeric type, which translates to
-the Arrow 64-bit floating point type by default. Arrow supports both
-single-precision (32-bit) and double-precision (64-bit) floating point
+<p>R has one double-precision (64 bit) numeric type, which translates to
+the Arrow 64 bit floating point type by default. Arrow supports both
+single-precision (32 bit) and double-precision (64 bit) floating point
 numbers, specified using the <code><a href="../reference/data-type.html">float32()</a></code> and
 <code><a href="../reference/data-type.html">float64()</a></code> data type functions. Both of these are translated
 to doubles in R. Examples are shown below:</p>
@@ -397,8 +396,8 @@ to doubles in R. Examples are shown below:</p>
 <code class="sourceCode R"><span class="va">arrow_double</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ChunkedArray.html">chunked_array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span><span class="op">)</span>, type <span class="op">=</span> <span class="fu"><a href="../reference/data-type.html">float64</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/vector.html" class="external-link">as.vector</a></span><span class="op">(</span><span class="va">arrow_double</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## [1] 0.1 0.2 0.3</span></code></pre>
-<p>Note that the Arrow specification also permits half-precision
-(16-bit) floating point numbers, but these have not yet been
+<p>Note that the Arrow specification also permits half-precision (16
+bit) floating point numbers, but these have not yet been
 implemented.</p>
 </div>
 <div class="section level2">
@@ -406,7 +405,7 @@ implemented.</p>
 </h2>
 <p>Arrow also contains <code><a href="../reference/data-type.html">decimal()</a></code> data types, in which
 numeric values are specified in decimal format rather than binary.
-Decimals in Arrow come in two varieties, a 128-bit version and a 256-bit
+Decimals in Arrow come in two varieties, a 128 bit version and a 256 bit
 version, but in most cases users should be able to use the more general
 <code><a href="../reference/data-type.html">decimal()</a></code> data type function rather than the specific
 <code><a href="../reference/data-type.html">decimal128()</a></code> and <code><a href="../reference/data-type.html">decimal256()</a></code> functions.</p>
@@ -455,13 +454,11 @@ in floating point arithmetic.</p>
 </h2>
 <p>R uses a single character type to represent strings whereas Arrow has
 two types. In the Arrow C++ library these types are referred to as
-strings and large_strings, but to avoid ambiguity in the
-<code>arrow</code> R package they are defined using the
-<code><a href="../reference/data-type.html">utf8()</a></code> and <code><a href="../reference/data-type.html">large_utf8()</a></code> data type functions.
-The distinction between these two Arrow types is unlikely to be
-important for R users, though the difference is discussed in the article
-on <a href="./developers/data_object_layout.html">data object
-layout</a>.</p>
+strings and large_strings, but to avoid ambiguity in the arrow R package
+they are defined using the <code><a href="../reference/data-type.html">utf8()</a></code> and
+<code><a href="../reference/data-type.html">large_utf8()</a></code> data type functions. The distinction between
+these two Arrow types is unlikely to be important for R users, though
+the difference is discussed in the article on <a href="./developers/data_object_layout.html">data object layout</a>.</p>
 <p>The default behavior is to translate R character vectors to the
 utf8/string type, and to translate both Arrow types to R character
 vectors:</p>
@@ -529,12 +526,12 @@ are coerced to strings when translated to R.</p>
 </h2>
 <p>In R, dates are typically represented using the Date class.
 Internally a Date object is a numeric type whose value counts the number
-of days since the beginning of the unix epoch (1 January 1970). Arrow
+of days since the beginning of the Unix epoch (1 January 1970). Arrow
 supplies two data types that can be used to represent dates: the date32
 type and the date64 type. The date32 type is similar to the Date class
-in R: internally it stores a 32-bit integer that counts the number of
-days since 1 January 1970. The default in <code>arrow</code> is to
-translate R Date objects to Arrow date32 types:</p>
+in R: internally it stores a 32 bit integer that counts the number of
+days since 1 January 1970. The default in arrow is to translate R Date
+objects to Arrow date32 types:</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nirvana_album_dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"1989-06-15"</span>, <span class="st">"1991-09-24"</span>, <span class="st">"1993-09-13"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">nirvana_album_dates</span></code></pre></div>
@@ -552,7 +549,7 @@ translate R Date objects to Arrow date32 types:</p>
 <span class="co">##   ]</span>
 <span class="co">## ]</span></code></pre>
 <p>Arrow also supplies a higher-precision date64 type, in which the date
-is represented as a 64-bit integer that encodes the number of
+is represented as a 64 bit integer that encodes the number of
 <em>milliseconds</em> since 1970-01-01 00:00 UTC:</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nirvana_64</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ChunkedArray.html">chunked_array</a></span><span class="op">(</span><span class="va">nirvana_album_dates</span>, type <span class="op">=</span> <span class="fu"><a href="../reference/data-type.html">date64</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
@@ -587,7 +584,7 @@ information, POSIXct and POSIXlt. Arrow only has one: the timestamp
 type. Arrow timestamps are loosely analogous to the POSIXct class.
 Internally, a POSIXct object represents the date with as a numeric
 variable that stores the number of seconds since 1970-01-01 00:00 UTC.
-Internally, an Arrow timestamp is a 64-bit integer counting the number
+Internally, an Arrow timestamp is a 64 bit integer counting the number
 of milliseconds since 1970-01-01 00:00 UTC.</p>
 <p>Arrow and R both support timezone information, but display it
 differently in the printed object. In R, local time is printed with the
@@ -629,7 +626,7 @@ to a specific day), but it can be done with the help of the <a href="https://hms
 Internally, hms objects are always stored as the number of seconds since
 00:00:00.</p>
 <p>Arrow has two data types for this purposes. For time32 types, data
-are stored as a 32-bit integer that is interpreted either as the number
+are stored as a 32 bit integer that is interpreted either as the number
 of seconds or the number of milliseconds since 00:00:00. Note the
 difference between the following:</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
@@ -651,7 +648,7 @@ difference between the following:</p>
 <span class="co">##     12:34:56.000</span>
 <span class="co">##   ]</span>
 <span class="co">## ]</span></code></pre>
-<p>A time64 object is similar, but stores the time of day using a 64-bit
+<p>A time64 object is similar, but stores the time of day using a 64 bit
 integer and can represent the time at higher precision. It is possible
 to choose microseconds (<code>unit = "us"</code>) or nanoseconds
 (<code>unit = "ns"</code>), as shown below:</p>
@@ -716,9 +713,9 @@ translate to difftime objects in R.</p>
 <h2 id="list-of-default-translations">List of default translations<a class="anchor" aria-label="anchor" href="#list-of-default-translations"></a>
 </h2>
 <p>The discussion above covers the most common cases. The two tables in
-this section provide a more complete list of how <code>arrow</code>
-translates between R data types and Arrow data types. In these table,
-entries with a <code>-</code> are not currently implemented.</p>
+this section provide a more complete list of how arrow translates
+between R data types and Arrow data types. In these table, entries with
+a <code>-</code> are not currently implemented.</p>
 <div class="section level3">
 <h3 id="translations-from-r-to-arrow">Translations from R to Arrow<a class="anchor" aria-label="anchor" href="#translations-from-r-to-arrow"></a>
 </h3>
@@ -795,7 +792,7 @@ entries with a <code>-</code> are not currently implemented.</p>
 </table>
 <p><sup>1</sup>: <code>float64</code> and <code>double</code> are the
 same concept and data type in Arrow C++; however, only
-<code><a href="../reference/data-type.html">float64()</a></code> is used in <code>arrow</code> as the function
+<code><a href="../reference/data-type.html">float64()</a></code> is used in arrow as the function
 <code><a href="https://rdrr.io/r/base/double.html" class="external-link">double()</a></code> already exists in base R</p>
 <p><sup>2</sup>: If the character vector exceeds 2GB of strings, it will
 be converted to a <code>large_utf8</code> Arrow type</p>
@@ -956,7 +953,7 @@ type).</p>
 </tbody>
 </table>
 <p><sup>1</sup>: These integer types may contain values that exceed the
-range of R’s <code>integer</code> type (32-bit signed integer). When
+range of R’s <code>integer</code> type (32 bit signed integer). When
 they do, <code>uint32</code> and <code>uint64</code> are converted to
 <code>double</code> (“numeric”) and <code>int64</code> is converted to
 <code><a href="https://rdrr.io/pkg/bit64/man/bit64-package.html" class="external-link">bit64::integer64</a></code>. This conversion can be disabled (so that
